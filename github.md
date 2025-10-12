@@ -24,6 +24,18 @@ Git is the version control software that runs locally on your machine. You don't
 ### 🐯 GitHub
 GitHub is a service that hosts Git repositories in the cloud and makes it easier to collaborate with other people. You do need to sign up for an account to use GitHub. It's an online social place to share work that is done using Git.
 
+### 🐯  Git Repository
+A git repository is a workspace which tracks and manages files within a folder. Before we can do anything with Git, we need to initialize or convert normal directory into git repository. Once in a lifetime of Git project.
+
+It also creates a .git hidden directory which contains all the information about git repository including git objects, info, logs, tags, refs etc. By default, it creates "master" but can be customized to create any other branch like "main".
+
+Do not initialize a Git repository inside another Git repository. Avoid Nesting.
+
+### 🐯 Basic Git Workflow
+1. Working Directory (Work On Stuff) --> Make new files, edit files, delete files etc.
+2. Staging Area (Add/Remove Stuff) --> Group specific changes together, in preparation of commiting.
+3. Repository (Permanent Stuff) --> Commit everything that was previously added.
+
 ---
 
 ### 🦁 Basic Git Commands
@@ -39,4 +51,18 @@ GitHub is a service that hosts Git repositories in the cloud and makes it easier
  
 ```git config --global user.email "shubhamsihasane101@gmail.com"``` ✅ Configure email for git
 
-### 🦁Basic GitHub Commands  g
+### 🦁 Basic GitHub Commands
+git status ✅ Gives current status of git repository and its contents. 
+
+```git init "ProjectName"``` ✅ Initialize or create a new git repository with "ProjectName"
+
+```git init``` OR ```git init .``` ✅ Convert current working directory as git repository
+
+```git status``` ✅ Check the current status of git repository
+
+```git add "filename"``` OR ```git add "file1 file2 ... file10"``` OR ```git add .``` ✅ Add one or more or all files from working directory to staging area of git.
+
+```git rm --cached "filename"``` OR ```git add "file1 file2 ... file10"``` ```git rm -r --cached .``` ✅ Remove untracked one or more files from staging area to working directory which is also known as unstaging.
+
+```git commit -m "Change Summary Message``` ✅ Commit a change with message which moves one or more files from staging area to local git repository.
+
