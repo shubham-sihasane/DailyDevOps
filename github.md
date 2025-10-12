@@ -31,6 +31,8 @@ It also creates a .git hidden directory which contains all the information about
 
 Do not initialize a Git repository inside another Git repository. Avoid Nesting.
 
+👹 .gitignore file specifies intentionally untracked files that Git should ignore. Each line in a .gitignore file specifies a pattern. This is useful for files you know you NEVER want commit including Secrets, API Keys, credentials, OS files, log files, dependencies or packages. 
+
 ### 🐯 Basic Git Workflow
 1. Working Directory (Work On Stuff) --> Make new files, edit files, delete files etc.
 2. Staging Area (Add/Remove Stuff) --> Group specific changes together, in preparation of commiting.
@@ -64,5 +66,15 @@ git status ✅ Gives current status of git repository and its contents.
 
 ```git rm --cached "filename"``` OR ```git add "file1 file2 ... file10"``` ```git rm -r --cached .``` ✅ Remove untracked one or more files from staging area to working directory which is also known as unstaging.
 
-```git commit -m "Change Summary Message``` ✅ Commit a change with message which moves one or more files from staging area to local git repository.
+```git commit -m "Change Summary Message``` ✅ Commit a change with message which moves one or more tracked or untracked files from staging area to local git repository. The first branch "master" or "main" only gets created after first commit. Practice Atomic Commits - Keep each commit focused on a single thing. Use present tense for commit messages.
+
+```git commit -am "Change Summary Message""``` ✅ Commit a change with message which moves one or more tracked files from working directory to local git repository without explicitly going via staging.
+
+```git commit --ammend``` ✅ Replace the tip of the current branch by creating a new commit. Helps in modifying the last commit including message.   
+
+```git log``` ✅ Generate detailed git logs 
+
+```git log --oneline``` ✅ Generate git logs in shorter version - one line
+
+```git restore --staged "filename"``` OR ```git restore --staged "file1 file2 ... file10"``` OR ```git restore --staged .``` ✅ Move one or more files or all files from staging area to working directory.
 
