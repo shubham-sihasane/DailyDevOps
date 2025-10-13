@@ -38,6 +38,7 @@ Do not initialize a Git repository inside another Git repository. Avoid Nesting.
 2. Staging Area (Add/Remove Stuff) --> Group specific changes together, in preparation of commiting.
 3. Repository (Permanent Stuff) --> Commit everything that was previously added.
 
+
 ---
 
 ### 🦁 Basic Git Commands
@@ -53,7 +54,6 @@ Do not initialize a Git repository inside another Git repository. Avoid Nesting.
  
 ```git config --global user.email "shubhamsihasane101@gmail.com"``` ✅ Configure email for git
 
-### 🦁 Basic GitHub Commands
 git status ✅ Gives current status of git repository and its contents. 
 
 ```git init "ProjectName"``` ✅ Initialize or create a new git repository with "ProjectName"
@@ -77,4 +77,24 @@ git status ✅ Gives current status of git repository and its contents.
 ```git log --oneline``` ✅ Generate git logs in shorter version - one line
 
 ```git restore --staged "filename"``` OR ```git restore --staged "file1 file2 ... file10"``` OR ```git restore --staged .``` ✅ Move one or more files or all files from staging area to working directory.
+
+### 🐯 GitHub Branching
+Branches are the essential parts of the Git. They enable us to create separate contexts where we can try new things, or even work on multiple ideas in parallel. If we change on one branch, they do not impact the other branches (unless we merge the changes).
+
+```git branch``` ✅ List all the branches in the repository. `*` represents the current branch.
+
+```git branch "BranchName"``` ✅ Create a new branch with "BranchName" based on current HEAD
+
+In Git, the HEAD is a pointer to the current branch or commit you are working on. Updating the HEAD can involve moving it to a different branch, commit, or even creating a detached HEAD state. Below are methods to update the HEAD effectively. [.git -> /ref/heads/ -> It contains the pointer to HEAD]
+
+```git switch "BranchName"``` OR ```git checkout "BranchName"``` ✅ Switch from current branch to "BranchName"
+
+```git switch -c "BranchName"``` OR ```git checkout -b "BranchName"``` ✅ Create and switch to new "BranchName"
+
+```git branch -m "NewBranchName"``` OR ```git branch -m "OldBranchName" "NewBranchName"``` ✅ Rename current branch OR "OldBranchName" to "NewBranchName"
+
+```git branch -d "BranchName"``` ✅ Delete a non-current branch
+
+```git branch -D "BranchName"``` ✅ Delete a branch forcefully
+
 

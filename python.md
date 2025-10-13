@@ -219,3 +219,5 @@ print(height)  # Output: 5.9
 ```
 
 Python variables are simple yet powerful, making them an essential part of writing clean and effective code.
+
+
