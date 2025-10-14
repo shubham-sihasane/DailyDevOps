@@ -38,7 +38,6 @@ Do not initialize a Git repository inside another Git repository. Avoid Nesting.
 2. Staging Area (Add/Remove Stuff) --> Group specific changes together, in preparation of commiting.
 3. Repository (Permanent Stuff) --> Commit everything that was previously added.
 
-
 ---
 
 ### 🦁 Basic Git Commands
@@ -97,4 +96,22 @@ In Git, the HEAD is a pointer to the current branch or commit you are working on
 
 ```git branch -D "BranchName"``` ✅ Delete a branch forcefully
 
+### 🐯 Git Merging
+Submitting a merge request in Git involves combining changes from one branch into another, typically as part of a collaborative development workflow. 
+1. We merge branches not specific commits
+2. We always merge to the current branch HEAD
+
+To merge, follow these basic steps:
+1. Switch to or checkout the branch you want to merge the changes into.
+2. Use the git merge command to merge changes from a specific branch into the current branch. 
+
+```git merge "BranchName"``` ✅ Merge "BranchName" with current branch
+```git merge "SourceBranch" "DestinationBranch"``` ✅ # Merge SourceBranch into Destination Branch
+
+### 🐯Types of Merging
+
+There are two primary types of merging in Git:
+1. **Fast-Forward Merging:** This occurs when the tip of the current branch is a direct ancestor of the target branch. Git simply moves the current branch tip up to the target branch tip.
+
+2. **Three-Way Merging:** This occurs when the base branch has changed since the branch was first created. Git generates a fresh merging commit that incorporates the modifications from both branches.
 
