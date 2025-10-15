@@ -153,3 +153,13 @@ do so (now or later) by using -c with the switch command. Example:
 Or undo this operation with:
 
   ```git switch -```
+
+### 🐯 Global Git Config
+Git looks for the global config file at either ```~/.gitconfig``` or ```~/.config/git/config```. Any configuration variables that we change in the file will be applied across all Git repos.
+
+### 🐯 Adding Alias
+We can set up Git alias to make our Git experience a bit simpler and faster
+
+```git config --global alias.<aliasName> <gitCommand>``` ✅ Configure ```st``` for ```status``` globally
+
+
