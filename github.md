@@ -167,13 +167,34 @@ to read about a specific subcommand or concept guides.
 - Write in present tense, not past tense (Fix a bug instead of Fixed a bug)
 - Can add change request or bug report tracking number
 
-```git log``` ✅ List history or log of commits in reverse chronological order
+#### 🌻 Git Logging
+```git log``` ✅ Returns an overview of all commits in the current branch in reverse chronological order by default
 
 ```git log --oneline``` ✅ List history or logs in oneline
+
+```git log <filename>``` ✅ Show logs only for filename
+
+```git log -n <count>``` OR ```git log -<count>``` ✅ Show logs only for past N commits
+
+```git log <SHA1>..<SHA2>``` ✅ Show logs between two commits ```git log HEAD~5..HEAD```
+
+```git log --since=2025-01-30``` OR ```git log --until="3 days ago"``` OR ```git log --after=2.weeks --before=3.days``` OR ```git log --author="Shubham Sihasnae"``` OR ```git log -E --grep="bug"``` ✅ Variations to filter the logs
+
+---
+
+#### 🌻 Log Formatting
+
+```git log --format=<parameter>``` ✅ Format the logs with parameter value = oneline, short, medium (default), full, fuller, email, raw
+
+```git log --graph``` OR ```git log --graph --all --oneline --decorate``` OR ```git log -p``` ✅ Format the output of logs
+
+---
 
 ```git show <commit-hash>``` ✅ List the contents of commit
 
 ```git show HEAD``` ✅ List the contents of last commit
+
+```git show <branch-name>``` ✅ List the contents of HEAD pointing to branch-name
 
 ```git show <tag-name>``` ✅ List the tag-name content
 
@@ -207,6 +228,8 @@ The process involves making the changes, adding those changes to a set, and then
 
 ```git diff <commit-1> <commit-2>``` ✅ Show the difference between two different commits
 
+```git diff <branch1>..<branch2>``` ✅ Show the difference between two branches | branch1 will be - changes | branch2 will be + changes
+
 #### 🌻 Remove files
 ```git rm <filename/s>``` ✅ Remove the tracked file from repository, git does not care about untracked files if removed but tracked already then need to remove from git as well --> Remove file directly or ask git to remove file
 
@@ -227,7 +250,7 @@ The process involves making the changes, adding those changes to a set, and then
   - /assets/videos/
   - /plugins/
 - File Pattern
-  - / directory seperator
+  - / directory separator
   - ** all directories or files inside a directory
   - * any character besides /
   - ? any one character besides /
@@ -248,8 +271,66 @@ By default, git ignores directories with no files
 - Add a file (.gitkeep) to any "empty" directory you want to track
 
 #### 🌻 Commit References
-- SHA Hash
+- SHA Hash - A unique 40 character identifier
 - HEAD pointer reference
+  - A reference to the tip of the current branch in the repository
+  - Most recently stored state of the current branch
+  - Points to the parent of the next commit, where writing new commits will occur
+  - In a way, the HEAD pointer represents your current location inside the repository
+  - ```cat .git/HEAD``` --> ```cat .git/refs/heads``` stores the reference to tip of branch (HEAD) | heads == # of branches
 - Branch reference
 - Tag reference
 - Ancestry
+  - ^ --> The prior commit
+  - ~n --> nth prior commit (default 1)
+  - commitID^ | HEAD^ | HEAD~1
+  - commitID^^ | HEAD^^ | HEAD~2
+  - ```git show -s --oneline HEAD~2```
+  - ```git log --oneline HEAD~6..HEAD~3```
+
+### ⛵ Git Branching
+- Branches are inexpensive
+  - Try new ideas 
+  - Develop features separate from other work
+- One working directory
+- Git replaces file versions when branch changes
+- Fast context switching
+
+```git branch``` ✅ List all available branches, * represents the current branch
+
+```git branch <branch-name>``` ✅ Create a new branch - branch-name
+
+```git switch <branch-name>``` ✅ Switch from current branch to branch-name
+
+```git branch -c <branch-name>``` ✅ Create and switch to a new branch | ```-c == --create```
+
+```git merge-base <branch1> <branch2>``` ✅ It helps to identify the most recent common commit where the branches diverged, useful for understanding changes in a branch.
+
+#### 🌻 Switching with Uncommited Changes
+- ✅ Can switch when changes in working directory can be applied to branch version
+- ✅ Can switch when changes in working directory are untracked or ignored files
+- 👹 Can not switch when changes in working directory conflict with branch version
+
+**How to switch:**
+- Commit the changes to the current branch
+- Remove the changes or restore the changed files
+- Switch branches while also discarding the changes
+- Stash the changes temporarily
+
+#### 🌻 Renaming branches
+Rename a branch
+
+```git branch -m <old-name> <new-name>``` ✅ Rename a branch from old-name t- new-name
+
+```git branch -m <new-name>``` ✅ Rename current branch to new-name
+
+#### 🌻 Deleting branches
+Delete a branch
+- You can not delete a current branch 
+- You can not delete uncommited/unmerged branch by default, but forcefully it can be deleted
+
+```git branch -d <branch-name>``` ✅ Delete a branch with branch-name | ```-d == --delete```
+
+```git branch -D <branch-name>``` ✅ Forcefully deleting a branch which is not merged.
+
+
