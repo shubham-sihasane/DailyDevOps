@@ -494,13 +494,39 @@ In Git, a tag is a reference that points to a specific commit, often used to mar
 
 There are two main types of tags: lightweight and annotated.
 
+1. Lightweight tags are like scribbling a quick note in pencil on a page.
+2. Annotated tags are like stamping the page with an official seal, signature, and date.
+
 #### 🌻 **Lightweight Tag**
 - Acts like a simple pointer to a commit. 
 - Contains only the commit checksum (no extra metadata). 
 - Created quickly, often for temporary or local use.
 - Think of it as a sticky note on a commit.
 
-```git tag <tag-name>``` ✅
+```git tag <tag-name>``` ✅ Create a tag with tag-name for last commit OR  HEAD
+
+```git tag <tag-name> <SHA-ID>``` ✅ Create a tag with tag-name for specific commit
 
 #### 🌻 **Annotated Tag**
-- 
+- A full object in Git’s database that stores metadata.
+- Includes tagger’s name, email, date, and a message. 
+- Can be signed with GPG for verification. 
+- Recommended for marking official releases.
+
+```git tag -a <tag-name> <SHA-ID> -m "Tag Message"``` ✅ Create an annotated tag with message
+
+#### 🌻 **List Show Tags**
+```git tag``` OR ```git tag -l``` OR ```git tag --list``` ✅ List available tags
+
+```git show <tag-name>``` ✅ Show the details of tag-name
+
+#### 🌻 **Push Tags**
+```git push <remote-name> <tag-name>``` ✅ Push specific tag
+
+```git push <remote-name> --tags``` ✅ Push local tags to remote location
+
+#### 🌻 **Delete Tags**
+```git tag -d <tag-name>``` ✅ Delete a previously create tag with tag-name
+
+```git push -d <remote-name> <tag-name>``` ✅ Delete a specific remote tag
+
