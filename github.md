@@ -59,8 +59,6 @@ It also creates a .git hidden directory which contains all the information about
 
 Do not initialize a Git repository inside another Git repository. Avoid Nesting.
 
-👹 .gitignore file specifies intentionally untracked files that Git should ignore. Each line in a .gitignore file specifies a pattern. This is useful for files you know you NEVER want commit including Secrets, API Keys, credentials, OS files, log files, dependencies or packages. 
-
 ### ⛵ Git Scope
 Git has three main configuration scopes: system, global, and local. Each defines where settings are stored and how widely they apply. There’s also a worktree scope in newer Git versions.
 
@@ -91,11 +89,6 @@ Git has three main configuration scopes: system, global, and local. Each defines
 🔖 **Precedence Order**
 - When Git looks up a configuration value, it checks in this order (from lowest to the highest priority): worktree --> local --> global --> system 
 - If the same setting exists in multiple scopes, the closest scope wins (e.g. local overrides global).
-
-### ⛵ Basic Git Workflow
-1. Working Directory (Work On Stuff) --> Make new files, edit files, delete files etc.
-2. Staging Area (Add/Remove Stuff) --> Group specific changes together, in preparation of commiting.
-3. Repository (Permanent Stuff) --> Commit everything that was previously added.
 
 ### 🏵️ Configurational Commands
 
@@ -140,5 +133,123 @@ to read about a specific subcommand or concept guides.
 
 ```git init``` OR ```git init .``` ✅ Convert current directory into git repository
 
+#### 🌻 Commiting
+- A commit is the fundamental unit when working with Git
+- You commit one or more changes grouped together represents a set
+- A set represents single unit of work or feature as commit
+
+```git status``` ✅ Get status of git repository
+
+```git add <filename>``` ✅ Add filename into staging area
+
+```git restore --staged <filename>``` ✅ Remove filename from staging area and put into working area
+
+```git add <filename1> <filename2> ...``` ✅ Add or more files into staging area
+
+```git restore --satged <filename1> <filename2> ...``` ✅ Remove one or more files from staging area and put into working area
+
+```git add .``` ✅ Add all files from working area to staging area
+
+```git restore --staged .``` ✅ Remove all files from staging area and put into working area
+
+```git commit -m <"commit-message">``` ✅ Commit a single unit of work with "commit-message" | -m includes the commit-message without opening editor
+
+```git commit``` ✅ It opens the editor for detailed commit message and description
+
+```git commit -am <commit-message>``` ✅ Commit change including all tracked files without going through staging area [working area to directly repository]
+
+```git commit --ammend -m <commit-message>``` ✅ Modify the commit message for only last commit
+
+#### 🌻 Commit Message Best Practices
+- A short single-line summary (less than 50 characters)
+- Optionally followed by a blank line and a more complete description
+- Keep each line less than 72 characters
+- Write in present tense, not past tense (Fix a bug instead of Fixed a bug)
+- Can add change request or bug report tracking number
+
+```git log``` ✅ List history or log of commits in reverse chronological order
+
+```git log --oneline``` ✅ List history or logs in oneline
+
+```git show <commit-hash>``` ✅ List the contents of commit
+
+```git show HEAD``` ✅ List the contents of last commit
+
+```git show <tag-name>``` ✅ List the tag-name content
+
+```git show <blob-name>``` ✅ List the blog-name content
+
+```git show <tree-name>``` ✅ List the tree-name content
+
+### ⛵ Basic Git Workflow (Local)
+Tree is a general computer science term for a hierarchical data structure . File System = Tree
+
+The process involves making the changes, adding those changes to a set, and then committing the set of changes to the repository with a description.
+
+1. Working Directory (Work On Stuff) --> Make new files, edit files, delete files etc.
+2. Staging Area (Add/Remove Stuff) --> Group specific changes together, in preparation of commiting.
+3. Repository (Permanent Stuff) --> Commit everything that was previously added.
+
+#### 🌻 Hash Values (SHA-1)
+- Unique identifier for data integrity
+- Git generates a hash value for each change set
+  - Hash algorithms reduce data into a unique alphanumeric string
+  - Same algorithm + same data = same hash value
+- Git uses SHA-1 hash algorithm
+  - 40 character hexadecimal string (0-9, a-f)
+- Sometimes referred to as "sha" value
+- Git not unique provides data integrity for content but also commits
+
+#### 🌻 Review files
+```git diff``` OR ```git diff HEAD``` Show the difference between working directory and last commit
+
+```git diff --staged``` OR ```git diff --staged HEAD``` ✅ Show the difference between staging area and last commit [--staged == --cached]
+
+```git diff <commit-1> <commit-2>``` ✅ Show the difference between two different commits
+
+#### 🌻 Remove files
+```git rm <filename/s>``` ✅ Remove the tracked file from repository, git does not care about untracked files if removed but tracked already then need to remove from git as well --> Remove file directly or ask git to remove file
+
+#### 🌻 Move / Rename files
+```git mv <filename>``` ✅ Rename filename in git --> Rename file directly or ask git to rename file
+
+```git mv <old-filepath> <new-filepath>``` ✅ Move a file from old-filepath to new-filepath
 
 
+#### 🌻 Ignore files for project
+- ".gitignore" file specifies intentionally untracked files that Git should ignore.
+- Each line in a .gitignore file specifies pattern that match the rules.
+- This is useful for files you know you NEVER want commit including Secrets, API Keys, credentials, OS files, log files, dependencies or packages.
+- Ignore exact file name
+  - .DS_Store
+  - database/backup.sql
+- Ignore all files in a directory with a trailing slash
+  - /assets/videos/
+  - /plugins/
+- File Pattern
+  - / directory seperator
+  - ** all directories or files inside a directory
+  - * any character besides /
+  - ? any one character besides /
+  - [aeiou] or [0-9] a character in a set of characters
+  - ! negates a file pattern
+- A collection of useful .gitignore templates https://github.com/github/gitignore
+- ```git help gitignore``` ✅ Get help around gitignore
+
+#### 🌻 Ignore Files Globally
+- Ignore files in all repositories
+- User level settings instead of project level settings
+```git config --global core.excludesFile <filePath>```
+- Settings are not stored in project repository
+- Settings are not shared with collaborators
+
+#### 🌻 Track Empty Directories
+By default, git ignores directories with no files
+- Add a file (.gitkeep) to any "empty" directory you want to track
+
+#### 🌻 Commit References
+- SHA Hash
+- HEAD pointer reference
+- Branch reference
+- Tag reference
+- Ancestry
