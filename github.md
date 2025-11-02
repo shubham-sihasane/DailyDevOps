@@ -138,6 +138,15 @@ to read about a specific subcommand or concept guides.
 - You commit one or more changes grouped together represents a set
 - A set represents single unit of work or feature as commit
 
+- **Atomic Commits**
+  - You must decide how to group changes
+  - Make small commits when possible
+  - Focus commits on a single concept
+  - Several commit messages will make sets of changes easier to understand
+  - Each commit will contain exclusively a set of changes related to a single task or purpose
+  - Improves collaboration and branch management
+  - Easier to find bugs
+
 ```git status``` ✅ Get status of git repository
 
 ```git add <filename>``` ✅ Add filename into staging area
@@ -230,6 +239,8 @@ The process involves making the changes, adding those changes to a set, and then
 
 ```git diff <branch1>..<branch2>``` ✅ Show the difference between two branches | branch1 will be - changes | branch2 will be + changes
 
+```git diff --word-diff=color``` ✅ Show the difference of only changed words in simple format
+
 #### 🌻 Remove files
 ```git rm <filename/s>``` ✅ Remove the tracked file from repository, git does not care about untracked files if removed but tracked already then need to remove from git as well --> Remove file directly or ask git to remove file
 
@@ -304,6 +315,10 @@ By default, git ignores directories with no files
 
 ```git branch -c <branch-name>``` ✅ Create and switch to a new branch | ```-c == --create```
 
+```git branch <created-branch> <to-be-created-branch>``` ✅ Create "to-be-created-branch" from "created-branch"
+
+```git branch --merged``` ✅ List the branches which are fully merged with current branch
+
 ```git merge-base <branch1> <branch2>``` ✅ It helps to identify the most recent common commit where the branches diverged, useful for understanding changes in a branch.
 
 #### 🌻 Switching with Uncommited Changes
@@ -333,4 +348,159 @@ Delete a branch
 
 ```git branch -D <branch-name>``` ✅ Forcefully deleting a branch which is not merged.
 
+### ⛵Git Merging
+git merge is a Git command used to combine changes from one branch into another, creating a unified history. It’s how you bring together parallel lines of development in a project.
 
+#### 🌻 **What git merge Does**
+Combines branches: It takes the commits from a source branch (e.g., feature-branch) and integrates them into the target branch (e.g., main).
+
+Preserves history: Unlike git rebase, merging doesn’t rewrite commit history—it keeps the original commits intact.
+
+Creates a merge commit (in most cases): This special commit has two parent commits, representing the point where the branches joined.
+
+```git merge <branch-name>``` ✅ Merge branch-name into current branch
+
+- If there are no conflicts, Git will automatically create a merge commit. 
+- If there are conflicts, Git will pause and ask you to resolve them manually.
+
+#### 🌻 Types of Merges
+**Fast-forward merge:** Happens when the target branch has no new commits since the source branch diverged. Git just moves the branch pointer forward.
+
+**Three-way merge:** Happens when both branches have new commits. Git creates a new merge commit to tie them together.
+
+#### 🌻 Resolving Merge Conflicts
+1. Abort Merge ✅
+2. Resolve conflicts manually ✅
+3. Use a merge tool ✅ 
+
+```git merge --abort``` ✅ Abort the ongoing merge
+
+#### 🌻 Strategies to Reduce Conflicts
+1. keep line lengths short
+2. Make atomic commits, small and focused
+3. Beware of edits to whitespace characters
+4. Merge frequently
+
+### ⛵Local and Remote Repositories
+1. Local Git repositories do not require a network connection
+2. Remote repositories (remotes) are hosted by servers over a network
+3. Remotes allow easy collaboration
+4. Push local repository changes to the remote
+5. Fetch remote changes to the local repository
+6. All repositories have qual authority
+7. One remote is often designated as the primary repository for collaboration
+
+```git remote add <origin> <URL>``` ✅ Configure remote URL to refer with origin
+
+```git remote``` ✅ List the name of remote referencing URL
+
+```git remote -v``` ✅ List the details about configured remote
+
+```git branch -r``` ✅ List all remote branches
+
+```git branch -a``` ✅ List all local and remote branches
+
+```git remote rm <remote-name>``` ✅ Delete the remote
+
+```git remote rename <old-remote-name> <new-remote-name>``` ✅ Rename old remote with new remote name
+
+```git remote show <remote-name>``` ✅ Fetch details about remote repository
+
+#### 🌻 Clone Remote Repository
+1. Collaborators need access to the remote
+2. owner must grant access to primate repositories
+3. Collaborators must clone repository
+
+```git clone <remote-url>``` ✅ Clone a remote project by keeping the same project name as directory
+
+```git clone <remote-url> <direcotry-name>``` ✅ Clone a remote project from remote-url and create a project with directory-name
+
+#### 🌻 Remote Repository Tracking
+- Local branch follows a remote branch closely 
+- Where to watch for new commits by default 
+- Where to send your commits by default 
+- Upstream branch and remote tracking branch are related 
+- Upstream is set for local branches
+  - When created from remote branches
+  - When pushed to a remote if -u option is included
+- Git can be configured to set upstream on push by default
+
+```git log <remote-branch> -N``` ✅ List last N logs from the remote-branch like remote/main
+
+```git config --global push.autoSetupRemote true``` ✅ Setup remote push automatically
+
+```git push <remote-name> <local-branch>:<remote-branch>``` ✅ Push local <branch-name> to remotely hosted remote-branch
+
+```git push -u <origin> <branch-name>``` ✅ Setup upstream for remote branch
+
+```git push``` ✅ Once upstream is configured for specific local to remote branch then git push is enough to push changes
+
+```git push -f``` ✅ Push forcefully but not recommended
+
+#### 🌻 Git Fetching - Pulling
+git fetch downloads the latest changes from a remote repository but does not merge them into your local branch, while git pull does the same fetch and immediately merges (or rebases) those changes into your current branch.
+
+**git fetch**
+- Contacts the remote repository (like origin)
+- Downloads new commits, branches, and tags 
+- Updates your local remote-tracking branches (e.g., origin/main)
+- It doesn’t change your working files or current branch.
+- Use case:
+  - When you want to see what others have pushed before merging it into your work. 
+  - Safe for inspection: you can review changes with git log origin/main or git diff main origin/main.
+
+**git pull**
+- Runs git fetch first 
+- Then automatically merges (or rebases, if configured) the fetched changes into your current branch 
+- git pull = git fetch + git merge
+- Your working directory is updated immediately with remote changes. 
+- Use case:
+  - When you’re ready to integrate remote updates into your branch in one step.
+
+**💡 Best Practices**
+- Use git fetch if you want control: review changes first, then decide whether to merge or rebase. 
+- Use git pull if you’re confident and want to stay up-to-date quickly. 
+- Many teams prefer git fetch + git merge (or git rebase) for clarity and fewer surprises.
+
+```git fetch <remote-name>``` ✅ Fetch changes from remote-name, remote-name is optional if already configured
+
+```git pull <remote-name> <branch-name>``` ✅ Pull = fetch and merge changes from remote branch into local branch
+
+#### 🌻 Delete a remote branch
+- Deletes the branch from remote repository
+- Deletes your remote-tracking branch
+- Does not delete any other local branches
+- Does not change collaborator repositories
+- Useful when a feature branch is complete and merged
+
+```git push -d <remote-name> <branch-name>``` ✅ Delete a remote branch
+
+```git remote prune <remote-name>``` ✅ Prune locally available remote branches | optionally --dry-run option allows previewing the branches that will be pruned without making any changes.
+
+#### 🌻 **Collaboration Types**
+- Private Projects
+  - Grant individual read and write access
+- Open Source Projects
+  - World has read access
+  - project leaders have write access
+
+### Git Tags
+In Git, a tag is a reference that points to a specific commit, often used to mark important points in history like releases (v1.0, v2.0). 
+
+- A tag is like a bookmark for a commit. 
+- It doesn’t move (unlike branches) — once created, it always points to the same commit. 
+- Commonly used for versioning software releases (e.g., v1.0.0, release-2025-11-03). 
+- Helps developers and CI/CD pipelines identify stable points in the project’s history.
+
+There are two main types of tags: lightweight and annotated.
+
+#### 🌻 **Lightweight Tag**
+- Acts like a simple pointer to a commit. 
+- Contains only the commit checksum (no extra metadata). 
+- Created quickly, often for temporary or local use.
+- Think of it as a sticky note on a commit.
+
+```git tag <tag-name>``` ✅
+
+#### 🌻 **Annotated Tag**
+- 
