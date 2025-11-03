@@ -167,7 +167,33 @@ to read about a specific subcommand or concept guides.
 
 ```git commit -am <commit-message>``` ✅ Commit change including all tracked files without going through staging area [working area to directly repository]
 
-```git commit --ammend -m <commit-message>``` ✅ Modify the commit message for only last commit
+#### 🌻Amending Commits
+- Git allows the most recent commit to be amended
+- Use for immediate adjustments
+- Can edit set of changes and commit message
+- Prior commits can be changed only with advanced techniques like rebase, reset
+- Amending a commit will change the SHA
+
+```git commit --amend -m <commit-message>``` ✅ Modify the commit message for only last commit
+
+#### 🌻 Revert a Commit
+- Revert - Return to a previous state
+- Reversing or undoing a commit in the repository
+- Undoing changes should be recorded in repository
+- Could undo changes by hand and make a new commit
+- Adds a new commit to the repository that reverses the specified commit
+- Git creates a change set that has been reversed
+- May encounter conflicts if simple reversal is not possible
+- Helpful to have atomic commits
+
+```git revert <SHA-ID>``` ✅ Revert to specific commit
+
+#### Remove untracked files
+Remove files no longer needed, temp files, output files, complied code, os artifacts etc.
+
+```git clean -n``` ✅ Clean working area from untracked files -n for --dry-run
+
+```git clean -f``` ✅ Clean everything from working area (only untracked stuff)
 
 #### 🌻 Commit Message Best Practices
 - A short single-line summary (less than 50 characters)
@@ -249,6 +275,16 @@ The process involves making the changes, adding those changes to a set, and then
 
 ```git mv <old-filepath> <new-filepath>``` ✅ Move a file from old-filepath to new-filepath
 
+### 🌻Undo Changes
+```git restore <filename/s>``` ✅ Undo changes. Restores file/s from staging area to working area
+
+```git restore .``` ✅ Undo changes. Restore everything from staging area to working area
+
+```git restore --staged <filename/s>``` ✅ Undo changes. Restore file/s from repository to staging area
+
+```git restore --staged .``` ✅ Undo changes. Restore everything from repository to staging area
+
+```git restore <filename> --source=<SHA_ID>``` ✅ Restore file from particular commit of the repository means repository to working area
 
 #### 🌻 Ignore files for project
 - ".gitignore" file specifies intentionally untracked files that Git should ignore.
