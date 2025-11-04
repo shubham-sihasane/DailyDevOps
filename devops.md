@@ -114,7 +114,7 @@ Use curl when:
 
 🌻 **Configure Service**
 Every service get configured with a systemd unit file. `/etc/systemd/system` Once unit file is ready then `systemctl daemon-relaod` ✅ Reload the systemctl daemon to inform about new service 
-
+ 
 
 #### Networking
 
