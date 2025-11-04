@@ -118,6 +118,32 @@ Every service get configured with a systemd unit file. `/etc/systemd/system` Onc
 
 #### Networking
 
+`hostname` ✅ Prints the hostname of the system
+
+`ping <hostname/URL/IP>` ✅ Tests connectivity to another network device. 
+
+`/etc/hosts` ✅ Keeps records of mapping of IP and hostname or URL | Google Public DNS `8.8.8.8` | Cloudflare Public DNS `1.1.1.1` 
+
+`/etc/resolv.conf` ✅ Keeps record of DNS server, and it's IP | hosts file gets precedence over resolv configuration (DNS) by default but this behaviour can be changed with `/etc/nsswitch.conf`
+
+`tracert (or traceroute)` ✅ Traces the route packets take to a destination.
+
+`ipconfig (Windows) / ifconfig (Linux)` ✅ Displays network configuration details.
+
+`nslookup <hostname/URL/IP>` ✅ Queries DNS to obtain domain name or IP address mapping.
+
+`dig <hostname/URL/IP>` ✅ Queries DNS to obtain domain name or IP address mapping with more details than nslookup.
+
+`netstat` ✅ Displays active connections and listening ports.
+
+`arp` ✅ Displays and modifies the ARP cache.
+
+`route` ✅ Displays and modifies the IP routing table.
+
+`telnet` ✅ Connects to remote devices for testing and management.
+
+`nmap` ✅ Scans networks to discover hosts and services.
+
 #### Application Basics
 
 #### Web Servers
