@@ -186,4 +186,30 @@
 #         break
 #     print(f"Hey, {user}")
 
+# for i in range(1, 11):
+#     if i % 2 == 0:
+#         print(i, end=' ')
+#
+# print()
+#
+# for i in range(1, 11):
+#     if i % 2 != 0:
+#         print(i, end=' ')
+
+# def sum_greater_than(numbers, num):
+#     addition = 0
+#     for n in numbers:
+#         if n > num:
+#             addition += n
+#     return addition
+# total = sum_greater_than([2,4,6,8,10],5)
+# print(f"The addition of numbers greater than 5 is {total}")
+
+# def funny_story():
+#     pass
+#
+# class Students:
+#     pass
+
+
 
