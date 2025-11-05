@@ -1,63 +1,67 @@
-### ⛵ Git
-Git is a free, open source and distributed, cross-platform version control system designed to handle everything from small to very large projects with speed and efficiency which helps in controlling and tracking of changes over time by managing the code history. It is faster than any other tools offers better safeguards against data corruption.
+### ⛵ What is Git & GitHub
+Git is a free, open source, and distributed version control system widely used in software development and DevOps to track changes in source code during software development. GitHub is a cloud-based platform that hosts Git repositories and provides collaboration features such as pull requests, issue tracking, and continuous integration. It is faster than any other tools offers better safeguards against data corruption.
 
-### ⛵ Source Code Management (SCM)
-Source Code Management (SCM) is the practice of tracking, organizing, and controlling changes to software code. It ensures that developers can work together without overwriting each other’s work, while keeping a full history of every change.
+### ⛵ What is a Version Control System (VCS)?
+A Version Control System (VCS) is a software tool that helps developers manage changes to source code over time. It keeps track of every modification made to the codebase, allowing multiple people to collaborate, revert to previous versions, and maintain a history of changes. It is popularly know as Source Code Management (SCM).
 
-🗂️ Versioning: Maintains past versions so you can roll back if needed.
+### Types of Version Control Systems
+There are mainly three types of version control systems:
 
-👥 Collaboration: Lets multiple developers contribute safely.
+#### Local Version Control Systems:
+- These systems keep versions of files on the local machine. 
+- They are simple but lack collaboration features.
+- An example is RCS (Revision Control System).
 
-🌿 Branching & Merging: Enables experimenting with new features before merging them into the main codebase.
+#### Centralized Version Control Systems (CVCS):
+- These systems have a single central server that stores all versions of the code.
+- Developers check out files from this central place.
+- Examples include CVS, Subversion (SVN), and Perforce. 
+- While it allows collaboration, it has a single point of failure.
 
-📜 History & Audit: Records who changed what, when, and why.
-
-Think of SCM as a shared library with a time machine: everyone can borrow, edit, and return books (code), while the system remembers every edition ever published.
-
-### History of Version Control
-Source Code Control System (SCCM) first built by AT&T in 1972 and shipped with Unix for free. Revision Control System (RCS) was cross-platform and faster built Walter in 1982. Both SCCM and RCS were designed to track individual files only.
-
-Concurrent Versions System (CVS) was built by Dick Grune to track multiple files, shared repositories in 1986.
-
-Apache Subversion (SVN) was built in 2000 which was faster used to track non-text files and track edits in a project.
-
-BitKeeper SCM was distributed, initially offered as free version in 2000 which was used for Linux kernel source code between 2002-2005 and controversial to use proprietary SCM for an open source projects.
+#### Distributed Version Control Systems (DVCS):
+- Every developer has a full copy of the entire repository, including its history. 
+- This allows for offline work and better collaboration. 
+- Examples include Git, Mercurial, and Bazaar.
 
 ### ⛵ History of Git
-Linus Torvalds is the creator and main developer of Git and Linux. 
 
-In 2005, while working on Linux, he became frustrated with the available version control systems (BitKeeper). The existing tools were slow, closed source and usually paid tools.
+Source Code Control System (SCCM) first built by AT&T in 1972 and shipped with Unix for free. Revision Control System (RCS) was cross-platform and faster built by Walter in 1982. Both SCCM and RCS were designed to track individual files only.
 
-On April 2005, he launched the initial version of Git (The stupid content tracker -> Global Information Tracker). The first official release came a couple of months later. 15 years later in 2020, over 90% of developers worldwide use Git on a daily basis.
+Concurrent Versions System (CVS) was built by Dick Grune to track multiple files, shared repositories in 1986. Apache Subversion (SVN) was built in 2000 which was faster used to track non-text files and track edits in a project.
 
-### ⛵ GitHub
-GitHub launched in 2008 as a service that hosts Git repositories in the cloud and makes it easier to collaborate with other people. You do need to sign up for an account to use GitHub. It's an online social place to share work that is done using Git.
+Git was created by Linus Torvalds in 2005 to support the development of the Linux kernel. Before Git, the Linux kernel project used a proprietary system called BitKeeper, but due to licensing issues, Linus decided to develop a new system that was fast, distributed, and reliable.
 
+Git quickly became popular due to its speed, flexibility, and powerful branching and merging capabilities. It is now the most widely used version control system in the world, especially in open-source and DevOps communities.
 
-### ⛵ Version Control System (VCS)
-A Version Control System (VCS) is software that helps developers track, manage, and organize changes to code. It allows teams to collaborate, experiment with new features, and roll back to earlier versions if something goes wrong.
+GitHub, launched in 2008, is a web-based platform that hosts Git repositories and adds collaboration features like pull requests, issue tracking, and project management, making Git even more accessible and powerful for teams.
 
-#### **Centralized (CVCS):**
-- A single server to store primary copy
-- Collaboration depends on the availability of the central repository
-- Developers can check out copies and submit changes, need same versions of all files
-- Examples: SCCS, RCS, CVS and SVN.
+### ⛵ What is GitHub
+GitHub is a cloud-based platform that hosts Git repositories and provides a web interface for version control and collaboration. It offers features like pull requests, issue tracking, code review, and project management, making it easier for teams to work together on software projects.
 
-#### **Distributed (DVCS):**
-- Different users maintain their own repositories.
-- Multiple people can have multiple copies with their own combination of change sets
-- Many changes are stored as change sets - tracks changes, not versions
-- Change sets can be exchanged between repositories.
-- No need to communicate with central server which makes it faster, no network dependency, no single point of failure.
-- Encourages participation and forking of projects so that developers can work independently, submit change sets for inclusion or rejection, take code in new direction, pick and choose from available change sets.
-- Can still designate a primary repository for collaboration which is not a requirement of Git by default, All repositories have an equal level of authority, easy to designate a different repository for collaboration.
+Git is the underlying version control system that manages changes to files and tracks history locally and remotely. GitHub uses Git as its core technology but adds a collaborative layer on top.
 
-### ⛵  Git Repository
-A git repository is a workspace which tracks and manages files within a folder. Before we can do anything with Git, we need to initialize or convert normal directory into git repository. Once in a lifetime of Git project.
+![img.png](images/img.png)
 
-It also creates a .git hidden directory which contains all the information about git repository including git objects, info, logs, tags, refs etc. By default, it creates <master< but can be customized to create any other branch like "main".
+### ⛵ How to install Git
+Installing Git depends on your operating system. Here are the general steps for the most common platforms:
+- Go to the official Git website: https://git-scm.com/download
 
-Do not initialize a Git repository inside another Git repository. Avoid Nesting.
+`git --version` ⌘ Check installed version of git
+
+### ⛵  What is a Git Repository
+A Git repository (or repo) is a folder based storage space where your project files and their complete history of changes are stored using Git. It contains all the files, folders, and metadata that Git needs to track the versions of your project.
+
+#### There are two main types of Git repositories:
+
+1. **Local Repository:** The copy of the repository on your local machine where you make changes, commit, and manage your code.
+
+2. **Remote Repository:** A version of the repository hosted on a server (like GitHub, GitLab, or Bitbucket) that allows collaboration and sharing with others.
+
+Git repositories enable you to track changes, revert to previous versions, branch out for new features, and collaborate efficiently with others. Once in a lifetime of a project.
+
+Git repository also keeps a `.git` hidden directory which contains all the information about git repository including git objects, info, logs, tags, refs etc. By default, it creates `master` branch but can be customized to create any other branch like `main`.
+
+**Note:** Do not initialize a Git repository inside another Git repository. Avoid nesting of repositories.
 
 ### ⛵ Git Scope
 Git has three main configuration scopes: system, global, and local. Each defines where settings are stored and how widely they apply. There’s also a worktree scope in newer Git versions.
@@ -90,7 +94,9 @@ Git has three main configuration scopes: system, global, and local. Each defines
 - When Git looks up a configuration value, it checks in this order (from lowest to the highest priority): worktree --> local --> global --> system 
 - If the same setting exists in multiple scopes, the closest scope wins (e.g. local overrides global).
 
-### 🏵️ Configurational Commands
+### ⛵ Git Configurational Commands
+Git configuration commands allow you to set up and customize Git behavior for your user account, repository, or system. These commands help define your identity, preferences, and how Git operates.
+
 
 ```git config --global user.name "<Firstname Lastname>"``` ✅ Configure username
 
@@ -100,13 +106,17 @@ Git has three main configuration scopes: system, global, and local. Each defines
 
 ```git config --global init.defaultBranch <branchName>``` ✅ Set default branch name like main, master, trunk development
 
-```git config --global core.editor "<code editor> --wait"``` ✅ Configure default code editor for commiting message like "code --wait" for vscode
+```git config --global core.editor "<code editor> --wait"``` ✅ Configure default code editor for commiting message like "code --wait" for VS Code
 
 ```git config --global --list``` ✅ List all the configured values globally
 
 ```git config --global <config-key>``` ✅ List the value of config-key like user.name
 
 ```cat ~/.gitconfig``` ✅ List the content of global config file
+
+`git config --global --unset <property>` ✅ Unset any global git property
+
+`git config --global --edit` ✅ Edit git config global file to configure manually
 
 ### 🏵 Basic Git Commands
 
@@ -186,7 +196,11 @@ to read about a specific subcommand or concept guides.
 - May encounter conflicts if simple reversal is not possible
 - Helpful to have atomic commits
 
-```git revert <SHA-ID>``` ✅ Revert to specific commit
+```git revert <SHA-ID>``` ✅ Revert to specific commit. It creates new commit and rollback changed by SHA-ID
+
+`git reset --soft HEAD~N` ✅ Revert to specific commit (HEAD~N) and keep the changes
+
+`git reset --hard HEAD~N` ✅ Revert to specific commit (HEAD~N) and discard the changes completely
 
 #### Remove untracked files
 Remove files no longer needed, temp files, output files, complied code, os artifacts etc.
@@ -206,6 +220,8 @@ Remove files no longer needed, temp files, output files, complied code, os artif
 ```git log``` ✅ Returns an overview of all commits in the current branch in reverse chronological order by default
 
 ```git log --oneline``` ✅ List history or logs in oneline
+
+`git log --oneline --name-only` ✅ List the history or logs in oneline along with list of files commited in the commit
 
 ```git log <filename>``` ✅ Show logs only for filename
 
@@ -270,19 +286,23 @@ The process involves making the changes, adding those changes to a set, and then
 #### 🌻 Remove files
 ```git rm <filename/s>``` ✅ Remove the tracked file from repository, git does not care about untracked files if removed but tracked already then need to remove from git as well --> Remove file directly or ask git to remove file
 
+`git rm --cached <filename>` ✅ Remove file from staging area to working area. No data loss
+
+`git rm <filename> -f` ✅ Remove file from staging area and working area as well. Data loss
+
 #### 🌻 Move / Rename files
 ```git mv <filename>``` ✅ Rename filename in git --> Rename file directly or ask git to rename file
 
 ```git mv <old-filepath> <new-filepath>``` ✅ Move a file from old-filepath to new-filepath
 
 ### 🌻Undo Changes
-```git restore <filename/s>``` ✅ Undo changes. Restores file/s from staging area to working area
+```git restore <filename/s>``` ✅ Undo changes. To discard changes in working area
 
-```git restore .``` ✅ Undo changes. Restore everything from staging area to working area
+```git restore .``` ✅ Undo changes. To discard changes in working area
 
-```git restore --staged <filename/s>``` ✅ Undo changes. Restore file/s from repository to staging area
+```git restore --staged <filename/s>``` ✅ Undo changes. Unstage file/s. Move file/s from staging area to working area
 
-```git restore --staged .``` ✅ Undo changes. Restore everything from repository to staging area
+```git restore --staged .``` ✅ Undo changes. Unstage everything. Move everything from staging area to working area
 
 ```git restore <filename> --source=<SHA_ID>``` ✅ Restore file from particular commit of the repository means repository to working area
 
@@ -349,7 +369,11 @@ By default, git ignores directories with no files
 
 ```git switch <branch-name>``` ✅ Switch from current branch to branch-name
 
-```git branch -c <branch-name>``` ✅ Create and switch to a new branch | ```-c == --create```
+```git switch -c <branch-name>``` ✅ Create and switch to a new branch | ```-c == --create```
+
+`git checkout <branch-name>` ✅ Switch/checkout a branch-name
+
+`git checkout -b <branch-name>` ✅ Create and checkout/switch to a branch-name
 
 ```git branch <created-branch> <to-be-created-branch>``` ✅ Create "to-be-created-branch" from "created-branch"
 
@@ -380,7 +404,7 @@ Delete a branch
 - You can not delete a current branch 
 - You can not delete uncommited/unmerged branch by default, but forcefully it can be deleted
 
-```git branch -d <branch-name>``` ✅ Delete a branch with branch-name | ```-d == --delete```
+```git branch -d <branch-name/s>``` ✅ Delete a branch with branch-name or multiple branches separated by space | ```-d == --delete```
 
 ```git branch -D <branch-name>``` ✅ Forcefully deleting a branch which is not merged.
 
@@ -396,6 +420,7 @@ Creates a merge commit (in most cases): This special commit has two parent commi
 
 ```git merge <branch-name>``` ✅ Merge branch-name into current branch
 
+- If there are no commits on <master>, git will automatically <branch> with fast-forward merging without any merge commit
 - If there are no conflicts, Git will automatically create a merge commit. 
 - If there are conflicts, Git will pause and ask you to resolve them manually.
 
@@ -566,3 +591,72 @@ There are two main types of tags: lightweight and annotated.
 
 ```git push -d <remote-name> <tag-name>``` ✅ Delete a specific remote tag
 
+### ⛵ Git Rebasing
+
+`git rebase` is a Git command that lets you move or combine a sequence of commits onto a new base commit, effectively rewriting history to create a cleaner, linear project history.
+
+Rebase = “reapply commits on top of another base.”  | Instead of merging (which creates a new merge commit), rebasing replays your commits on top of the branch you’re rebasing onto.
+
+**How It Works**
+- Suppose you branched off main into feature.
+- While you worked on feature, new commits were added to main.
+
+`git checkout feature`
+`git rebase main`
+
+- Git will temporarily remove your feature commits. Move feature to the tip of main. Replay your commits one by one on top of main.
+
+`git rebase -i HEAD~N` ✅ Manage last N commits with rebase
+
+### ⛵ Git Cherry Picking
+Git cherry-pick is a powerful command that allows you to apply specific commits from one branch to another. This can be particularly useful in scenarios such as bug fixes, team collaboration, or undoing changes.
+
+`git cherry-pick <commit-hash>` ✅ Perform the cherry-pick operation from different branch commit to current branch
+
+### ⛵ Git Stash
+git stash is a Git command that lets you temporarily save (or "stash") your uncommitted changes without committing them, so you can switch branches or pull updates safely. Later, you can reapply or discard those stashed changes.
+
+- Purpose: Temporarily shelves your local modifications (both staged and unstaged) so you can work on something else without committing. 
+- Use case: Imagine you’re in the middle of editing files, but you need to quickly switch branches to fix a bug. Instead of committing half-done work, you stash it.
+
+
+`git stash`	✅ Saves your changes (tracked files only) and reverts working directory to last commit.
+
+`git stash save "message"`	✅ Same as above but with a custom message for clarity.
+
+`git stash -u`	✅ Stashes tracked + untracked files.
+
+`git stash -a`	✅ Stashes tracked, untracked, and ignored files.
+
+`git stash list` ✅ Shows all stashes with index and message.
+
+`git stash show <stash-ID>`	✅ Shows summary of changes in the latest stash.
+
+`git stash show -p`	✅ Shows detailed patch of stashed changes.
+
+`git stash apply` ✅ Reapplies the latest stash but keeps it in the stash list.
+
+`git stash apply stash@{n}`	✅ Applies a specific stash by index.
+
+`git stash pop`	✅ Applies the latest stash and removes it from the stash list.
+
+`git stash drop stash@{n}` ✅ Deletes a specific stash.
+
+`git stash clear` ✅ Deletes all stashes.
+
+`git stash branch <branchname>`	✅ Creates a new branch from the commit where you stashed, and applies the stash there.
+
+**Pro Tips**
+- Use git stash list often if you stash multiple times—it’s easy to forget what’s inside.
+- Prefer git stash pop when you’re sure you don’t need the stash anymore. Otherwise, use git stash apply so it stays saved. 
+- Combine with git stash branch if you realize your stashed changes deserve their own branch.
+
+### ⛵ Git Reflog
+git reflog is a Git command that shows a log of all the changes made to the tips of branches and other references in your repository. It’s like a safety net that lets you recover commits even if they’re not visible in git log anymore.
+
+`git reflog` ✅ Reference log for everything (stage of repository) not just commit history
+
+**Note:**
+Use git reflog when you think you’ve “lost” commits—they’re usually still there.
+- - git log = project history (commits in branch). 
+- git reflog = movement history (all HEAD changes).

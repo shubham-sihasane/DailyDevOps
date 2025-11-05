@@ -19,6 +19,8 @@
 
 `echo $?` ✅ Print the return value of previous command as 1 for success 0 for failure
 
+`echo <text> >> <filename>` ✅ Write text to a file
+
 `ls` ✅ List files and folders in the current directory or specific directory`ls <filename/directory>`
 
 `ls -l` ✅ Print files and folders with details
