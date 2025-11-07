@@ -211,5 +211,94 @@
 # class Students:
 #     pass
 
+# print(0b1101011)  # prints 107
+#
+# print(0xFB + 0b10)  # prints 253
+#
+# print(0o15)  # prints 13
 
+# import random
+#
+# print(random.randint(1,100))
+# print(random.randrange(1,100))
+#
+# friends = ['shubham', 'omkar', 'manoj','rashmi']
+# print(random.choice(friends))
+# print(friends)
+# random.shuffle(friends)
+# print(friends)
+
+# import math
+# print(math.pi)
+# print(math.cos(math.pi))
+# print(math.exp(10))
+# print(math.log10(1000))
+# print(math.sinh(1))
+# print(math.factorial(6))
+
+# import math
+# def calculate_circle_area(radius):
+#     if radius < 0:
+#         print("Radius cannot be negative.")
+#     return (math.pi * (radius ** 2))
+#
+# # Example usage:
+# radius_value = float(input("Enter radius: "))
+# area_of_circle = calculate_circle_area(radius_value)
+# print(f"The area of a circle with radius {radius_value} is: {area_of_circle}")
+
+fruits = ["apple", "mango", "banana", "pineapple", "apple"]
+friends = ["shubham", "omkar", "manoj"]
+# print(fruits)
+#
+# for fruit in fruits:
+#     print("I love " + fruit)
+#
+# print(f"The first item is {fruits[0]}")
+# print(f"The last item is {fruits[-1]}")
+# print(f"The list of items is {fruits[:]}")
+# print(f"The items from 0th to 2nd item is {fruits[:3]}")
+# print(f"The items from 1st to 3rd item is {fruits[1:3]}")
+
+# fruits[3] = "jackfruit"
+# print(fruits)
+# fruits.append("orange")
+# print(fruits)
+#
+# fruits.remove("apple")
+# print(fruits)
+#
+# fruits.insert(4, "apple")
+# print(fruits)
+#
+# fruits.reverse()
+# print(fruits)
+#
+# fruits.sort()
+# print(fruits)
+#
+# fruits.sort(reverse=True)
+# print(fruits)
+#
+# fruits.pop()
+# print(fruits)
+
+# fruits.extend(friends)
+# print(fruits)
+
+# fruits.clear()
+# print(fruits)
+
+# del friends[1]
+# print(friends)
+#
+# del friends
+# print(friends) # Error as friends list deleted
+
+# print(f"The number of fruits: {len(fruits)}")
+
+# print(f"The count of apples is {fruits.count("apple")}")
+
+# fals = fruits.copy()
+# print(fals)
 
