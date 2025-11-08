@@ -151,10 +151,61 @@ Use curl when:
 🌻 **Configure Service**
 Every service get configured with a systemd unit file. `/etc/systemd/system` Once unit file is ready then `systemctl daemon-relaod` ✅ Reload the systemctl daemon to inform about new service
 
-#### Run-levels
+`uname` ⌘ Display the kernal name `uname -r` ⌘ Display the kernal version
 
+`lsblk` ⌘ Displays the list of block devices on the system `RAM=1 HARD DISK=3 PRINTERS=6 SCSI DISK=8`
+
+`lscpu` ⌘ Displays the detailed information about cpu
+
+`lsmem --summary` ⌘ Displays the system memory information
+
+`lshw` ⌘ Displays the entire hardware information of the system
+
+`free -g -h` ⌘ Display the total and used memory of the system `-k=KB, -m=MB, -g=GB, -h=human readable`
+
+`df -h` ⌘ Displays the disk file details
+
+### Linux Boot Process
+1. BIOS POST (Basic Input-Output System Power On Self Test)
+2. Boot Loader (GRUB2 - Grand Unified Boot Loader 2)
+3. Kernel Initialization (Loads system into the memory)
+4. INIT Process (Systemd) (Bring system in usable state)
+
+Run levels in Linux define the operating state of the system, determining which services and processes are active. These levels, typically numbered 0-6, are a fundamental concept in traditional SysVinit systems, although modern Linux distributions often utilize systemd which uses "targets" that are conceptually similar to run levels.
+
+- Runlevel 0: System halt (shutdown). 
+- Runlevel 1 (Single-User Mode): Minimal services, primarily for maintenance or recovery.  (poweroff.target)
+- Runlevel 2: Multi-user mode without network services (less common).  (rescue.target)
+- Runlevel 3: Full multi-user mode with networking, command-line interface. (multi-user.target)
+- Runlevel 4: User-definable (often unused). (multi-user.target)
+- Runlevel 5: Full multi-user mode with networking and a graphical user interface (GUI). (graphical.target)
+- Runlevel 6: System reboot. (reboot.target)
+
+`runlevel` ⌘ Displays default runlevel
+
+`systemctl get-default` ⌘ Displays default mode - CLI or GUI
+
+`system set-default <graphical.target/multi-user.target>` ⌘ Change default OS mode
 
 `hostname` ✅ Prints the hostname of the system
+
+`hostnamectl` ⌘ Prints host details
+
+`sudo hostnamectl set-hostname <new-hostname>` ⌘ Rename hostname of system
+
+### File Types
+1. Regular Files (-): These are standard data files, such as text documents, executable programs, images, or archives.
+2. Directories (d): These are special files that contain references to other files and directories, forming the hierarchical structure of the file system.
+3. Special Files
+   - Symbolic Links (l): Also known as soft links, these files act as pointers to other files or directories, providing an alternative path to access the linked target. 
+   - Character Device Files (c): These represent devices that handle data character by character, such as keyboards, mice, or serial ports. 
+   - Block Device Files (b): These represent devices that handle data in fixed-size blocks, primarily storage devices like hard drives, SSDs, or CD-ROM drives. 
+   - Named Pipes (FIFO) (p): These facilitate inter-process communication, allowing data to flow in a one-way, first-in, first-out manner between processes. 
+   - Sockets (s): These are used for inter-process communication, enabling data exchange between processes on the same system or across a network.
+
+`file <regular/direcotry>/special-file` ⌘ Displays the file type, Alternatively `ls -l` first character
+
+![files.png](images/files.png)
 
 `ping <hostname/URL/IP>` ✅ Tests connectivity to another network device.
 
@@ -179,3 +230,8 @@ Every service get configured with a systemd unit file. `/etc/systemd/system` Onc
 `telnet` ✅ Connects to remote devices for testing and management.
 
 `nmap` ✅ Scans networks to discover hosts and services.
+
+### Package Managers
+
+1. Debian Based Distro - Debian, Ubuntu, Kali Linux [DPKG -> APT-GET -> APT]
+2. RPM Based Distro - RHEL, CentOs, Fedora [RPM -> YUM, DNF]

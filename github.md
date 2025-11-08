@@ -122,8 +122,6 @@ Git configuration commands allow you to set up and customize Git behavior for yo
 
 ```git --version``` OR ```git -v``` ✅ Check installed git version
 
----
-
 ```git help``` ✅ List all the important git commands with short description
 
 ```git help git``` ✅ The complete git documentation
