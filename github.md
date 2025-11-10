@@ -237,6 +237,8 @@ Remove files no longer needed, temp files, output files, complied code, os artif
 
 ```git log --graph``` OR ```git log --graph --all --oneline --decorate``` OR ```git log -p``` ✅ Format the output of logs
 
+`git log --stat` ⌘ Detailed logs including files changed in commit [statistical summary]
+
 ---
 
 ```git show <commit-hash>``` ✅ List the contents of commit
@@ -271,6 +273,9 @@ The process involves making the changes, adding those changes to a set, and then
 - Git not unique provides data integrity for content but also commits
 
 #### 🌻 Review files
+
+`git diff -- <filename>` ⌘ This command will show the changes made to filename between the specified commits.
+
 ```git diff``` OR ```git diff HEAD``` Show the difference between working directory and last commit
 
 ```git diff --staged``` OR ```git diff --staged HEAD``` ✅ Show the difference between staging area and last commit [--staged == --cached]
