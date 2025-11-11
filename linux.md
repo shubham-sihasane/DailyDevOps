@@ -235,3 +235,81 @@ Run levels in Linux define the operating state of the system, determining which 
 
 1. Debian Based Distro - Debian, Ubuntu, Kali Linux [DPKG -> APT-GET -> APT]
 2. RPM Based Distro - RHEL, CentOs, Fedora [RPM -> YUM, DNF]
+
+#### RPM - Red Hat Package Manager
+RPM defines a specific file format (.rpm) for packaging software. These packages contain all the necessary files (executables, libraries, configuration files, documentation, etc.), along with metadata like dependencies, version information, and pre-post installation scripts.
+
+While RPM itself can manage dependencies, higher-level package managers like yum (Yellowdog Updater, Modified) and dnf (Dandified YUM) build upon RPM to automate dependency resolution, making software installation and updates much smoother.
+
+1. Install `rpm -ivh <package-name>`
+2. Uninstall `rpm -e <package-name>`
+3. Upgrade `rpm -uvh <package-name>`
+4. Query `rpm -q <package-name>`
+5. Verifying `rpm -vf <package-name>`
+
+#### YUM - Yellowdog Updator Modified
+YUM (Yellowdog Updater, Modified) is a command-line package manager for RPM-based Linux distributions like CentOS and Fedora, used to install, update, and remove software packages and their dependencies. It automatically handles dependencies and upgrades from online repositories, making it easier to manage software compared to the lower-level RPM tool.
+
+1. Install `yum install <package-name>`
+2. Uninstall `yum remove <package-name>`
+3. Upgrade `yum update <package-name>` OR `yum update` for all packages 
+4. Repolist `yum repolist` 
+
+#### DPKG & APT
+dpkg (Debian Package Manager) is a low-level tool for installing, removing, and managing individual Debian package files (.deb), while apt (Advanced Package Tool) is a higher-level package management system that handles dependencies and retrieves packages from online repositories. 
+
+1. Install `dpkg -i <package-name>`
+2. Uninstall `dpkg -r <package-name>`
+3. List `dpkg -l <package-name>`
+4. Status `dpkg -s <package-name>`
+5. verify `dpkg -p <path-to-file>`
+
+apt is a more user-friendly frontend that uses dpkg to perform the actual installation and manages the complexities of package relationships automatically.
+
+1. Install `apt install <package-name>`
+2. Uninstall `apt uninstall <package-name>`
+3. Update repo `apt update`
+4. Upgrade `apt upgrade`
+5. Search `apt search <package-name>`
+6. List `apt list | grep <package-name>`
+
+The du command in Linux, short for "disk usage," is used to estimate and display the disk space used by files and directories. It recursively calculates and shows the size of directories and their contents. 
+
+`du -lh <file/directory>`
+
+The tar command in Linux is a powerful utility used for creating, viewing, and extracting files from archives, often referred to as "tarballs." It is commonly used for backups, software distribution, and transferring collections of files while preserving their directory structure, permissions, and other metadata.
+
+**Creating an archive:**
+tar -cvf archive_name.tar file1 file2 dir1/: Creates an uncompressed archive.
+tar -czvf archive_name.tar.gz file1 file2 dir1/: Creates a gzipped (compressed) archive.
+tar -cjvf archive_name.tar.bz2 file1 file2 dir1/: Creates a bzip2 (highly compressed) archive.
+tar -cJvf archive_name.tar.xz file1 file2 dir1/: Creates an xz (highly compressed) archive.
+Options used:
+-c: Create a new archive.
+-v: Verbosely list files processed.
+-f: Specify the filename of the archive.
+-z: Filter through gzip for compression/decompression.
+-j: Filter through bzip2 for compression/decompression.
+-J: Filter through xz for compression/decompression.
+Extracting files from an archive:
+tar -xvf archive_name.tar: Extracts files from an uncompressed archive.
+tar -xvf archive_name.tar.gz: Extracts files from a gzipped archive.
+tar -xvf archive_name.tar.bz2: Extracts files from a bzip2 archive.
+tar -xvf archive_name.tar.xz: Extracts files from an xz archive.
+tar -xvf archive_name.tar.gz -C /path/to/destination: Extracts to a specific directory.
+Options used:
+-x: Extract files from an archive.
+-C: Change to a specified directory before performing the operation.
+Listing the contents of an archive:
+tar -tvf archive_name.tar: Lists contents of an uncompressed archive.
+tar -tvf archive_name.tar.gz: Lists contents of a gzipped archive.
+Options used:
+-t: List the contents of an archive.
+Adding files to an existing archive:
+tar -rvf archive_name.tar new_file: Appends a new file to an existing uncompressed archive.
+Options used:
+-r: Append files to an existing archive.
+Updating files in an archive:
+tar -uvf archive_name.tar updated_file: Updates files in an archive with newer versions from the filesystem.
+Options used:
+-u: Update files in the archive.

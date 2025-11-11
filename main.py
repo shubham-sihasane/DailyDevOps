@@ -247,8 +247,8 @@
 # area_of_circle = calculate_circle_area(radius_value)
 # print(f"The area of a circle with radius {radius_value} is: {area_of_circle}")
 
-fruits = ["apple", "mango", "banana", "pineapple", "apple"]
-friends = ["shubham", "omkar", "manoj"]
+# fruits = ["apple", "mango", "banana", "pineapple", "apple"]
+# friends = ["shubham", "omkar", "manoj"]
 # print(fruits)
 #
 # for fruit in fruits:
