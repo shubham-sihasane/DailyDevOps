@@ -207,30 +207,6 @@ Run levels in Linux define the operating state of the system, determining which 
 
 ![files.png](images/files.png)
 
-`ping <hostname/URL/IP>` ✅ Tests connectivity to another network device.
-
-`/etc/hosts` ✅ Keeps records of mapping of IP and hostname or URL | Google Public DNS `8.8.8.8` | Cloudflare Public DNS `1.1.1.1`
-
-`/etc/resolv.conf` ✅ Keeps record of DNS server, and it's IP | hosts file gets precedence over resolv configuration (DNS) by default but this behaviour can be changed with `/etc/nsswitch.conf`
-
-`tracert (or traceroute)` ✅ Traces the route packets take to a destination.
-
-`ipconfig (Windows) / ifconfig (Linux)` ✅ Displays network configuration details.
-
-`nslookup <hostname/URL/IP>` ✅ Queries DNS to obtain domain name or IP address mapping.
-
-`dig <hostname/URL/IP>` ✅ Queries DNS to obtain domain name or IP address mapping with more details than nslookup.
-
-`netstat` ✅ Displays active connections and listening ports.
-
-`arp` ✅ Displays and modifies the ARP cache.
-
-`route` ✅ Displays and modifies the IP routing table.
-
-`telnet` ✅ Connects to remote devices for testing and management.
-
-`nmap` ✅ Scans networks to discover hosts and services.
-
 ### Package Managers
 
 1. Debian Based Distro - Debian, Ubuntu, Kali Linux [DPKG -> APT-GET -> APT]
@@ -280,36 +256,88 @@ The du command in Linux, short for "disk usage," is used to estimate and display
 The tar command in Linux is a powerful utility used for creating, viewing, and extracting files from archives, often referred to as "tarballs." It is commonly used for backups, software distribution, and transferring collections of files while preserving their directory structure, permissions, and other metadata.
 
 **Creating an archive:**
-tar -cvf archive_name.tar file1 file2 dir1/: Creates an uncompressed archive.
-tar -czvf archive_name.tar.gz file1 file2 dir1/: Creates a gzipped (compressed) archive.
-tar -cjvf archive_name.tar.bz2 file1 file2 dir1/: Creates a bzip2 (highly compressed) archive.
-tar -cJvf archive_name.tar.xz file1 file2 dir1/: Creates an xz (highly compressed) archive.
-Options used:
--c: Create a new archive.
--v: Verbosely list files processed.
--f: Specify the filename of the archive.
--z: Filter through gzip for compression/decompression.
--j: Filter through bzip2 for compression/decompression.
--J: Filter through xz for compression/decompression.
-Extracting files from an archive:
-tar -xvf archive_name.tar: Extracts files from an uncompressed archive.
-tar -xvf archive_name.tar.gz: Extracts files from a gzipped archive.
-tar -xvf archive_name.tar.bz2: Extracts files from a bzip2 archive.
-tar -xvf archive_name.tar.xz: Extracts files from an xz archive.
-tar -xvf archive_name.tar.gz -C /path/to/destination: Extracts to a specific directory.
-Options used:
--x: Extract files from an archive.
--C: Change to a specified directory before performing the operation.
-Listing the contents of an archive:
-tar -tvf archive_name.tar: Lists contents of an uncompressed archive.
-tar -tvf archive_name.tar.gz: Lists contents of a gzipped archive.
-Options used:
--t: List the contents of an archive.
-Adding files to an existing archive:
-tar -rvf archive_name.tar new_file: Appends a new file to an existing uncompressed archive.
-Options used:
--r: Append files to an existing archive.
-Updating files in an archive:
-tar -uvf archive_name.tar updated_file: Updates files in an archive with newer versions from the filesystem.
-Options used:
--u: Update files in the archive.
+`tar -cvf archive_name.tar file1 file2 dir1/` ⌘ Creates an uncompressed archive.
+
+`tar -czvf archive_name.tar.gz file1 file2 dir1/` ⌘ Creates a gzipped (compressed) archive.
+
+`gzip <archive_name.tar>` ⌘ Create gzip from tarball
+
+`ungzip <archive_tar.gz>` ⌘ Unzip from gzip file
+
+**Options used:**
+- -c: Create a new archive. 
+- -v: Verbosely list files processed. 
+- -f: Specify the filename of the archive. 
+- -z: Filter through gzip for compression/decompression.
+
+**Extracting files from an archive:**
+`tar -xvf archive_name.tar` ⌘ Extracts files from an uncompressed archive.
+
+`tar -xvf archive_name.tar.gz` ⌘ Extracts files from a gzipped archive.
+
+`tar -xvf archive_name.tar.bz2` ⌘ Extracts files from a bzip2 archive.
+
+`tar -xvf archive_name.tar.xz` ⌘ Extracts files from xz archive.
+
+`tar -xvf archive_name.tar.gz -C /path/to/destination` ⌘ Extracts to a specific directory.
+
+**Options used:**
+- -x: Extract files from an archive. 
+- -C: Change to a specified directory before performing the operation.
+
+**Listing the contents of an archive:**
+`tar -tvf archive_name.tar` ⌘ Lists contents of an uncompressed archive.
+`tar -tvf archive_name.tar.gz` ⌘ Lists contents of a gzipped archive.
+
+**Options used:**
+- -t: List the contents of an archive.
+
+`locate <filenamec>` The locate command in Linux is a utility used to quickly find files and directories by name. It operates by searching a pre-built database of file paths, rather than scanning the entire filesystem in real-time.
+
+`find <filename>` The find command in Linux is a powerful utility used to search for files and directories within a specified hierarchy based on various criteria. `find -name <pattern>`
+
+`grep -i <pattern> <filename/dir>` The grep command in Linux is a powerful command-line utility used for searching plain-text data sets for lines that match a regular expression. 
+
+The name grep stands for "global regular expression print. `-i for case insensitive` & `-r for recursively search` & `-v for everything except pattern` & `-w for exact word` & `-vw for first line for exact word`
+
+`grep -A1 -B1 <pattern> <filename>` ⌘ Print #N of lines after (-AN) and before (-BN) pattern in filename
+
+#### IO Redirection & Command Line Pipes
+`command1 | command2` ⌘ Output of command1 as input to command2 `cat <filename> | less`
+
+`cat <text> > <filename>` ⌘ Redirect text into file and overwrite
+
+`echo <text> | tee <filename>` ⌘ Paste text into file and overwrite
+
+`cat <text> >> <filename>` ⌘ Redirect text into file and append
+
+`echo <text> | tee -a <filename>` ⌘ Paste text into file and append
+
+### Networking
+
+`ping <hostname/URL/IP>` ✅ Tests connectivity to another network device.
+
+`/etc/hosts` ✅ Keeps records of mapping of IP and hostname or URL | Google Public DNS `8.8.8.8` | Cloudflare Public DNS `1.1.1.1`
+
+`/etc/resolv.conf` ✅ Keeps record of DNS server, and it's IP | hosts file gets precedence over resolv configuration (DNS) by default but this behaviour can be changed with `/etc/nsswitch.conf`
+
+`tracert (or traceroute)` ✅ Traces the route packets take to a destination.
+
+`ipconfig (Windows) / ifconfig (Linux)` ✅ Displays network configuration details.
+
+`nslookup <hostname/URL/IP>` ✅ Queries DNS to obtain domain name or IP address mapping.
+
+`dig <hostname/URL/IP>` ✅ Queries DNS to obtain domain name or IP address mapping with more details than nslookup.
+
+`netstat` ✅ Displays active connections and listening ports.
+
+`arp` ✅ Displays and modifies the ARP cache.
+
+`route` ✅ Displays and modifies the IP routing table.
+
+`telnet` ✅ Connects to remote devices for testing and management.
+
+`nmap` ✅ Scans networks to discover hosts and services.r
+
+
+
