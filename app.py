@@ -1,5 +1,5 @@
 # A playground for learning python concepts
-import math
+# import math
 
 # print("Hello, World!")
 # print("This is a playground for learning Python concepts.")
@@ -129,3 +129,72 @@ import math
 # hypo = math.hypot(side1, side2) # math.sqrt((pow(side1, 2)) + (pow(side2, 2)))
 # print(f"The hypo value of triangle is {hypo:.2f}")
 
+# Conditional Logic
+# Do some code only if some condition is true
+# Else do something else
+
+# age = int(input("Enter your age: "))
+#
+# if age >= 18:
+#     print("Tu vote kar sakta hain!")
+# elif age < 0:
+#     print("Paida to ho ja bhai.")
+# elif age < 18:
+#     print("Tu vote karne layak abhi bana nahi!")
+# elif age > 100:
+#     print("Tu abhi tak mara nahi...")
+# else:
+#     print("Chala ja... ")
+
+# is_online = True # False
+# if is_online:
+#     print("Online 🍏 ")
+# else:
+#     print("Offline 🍎 ")
+
+# Python Calculator
+# Create python calculator program to accept two numbers and perform required operations
+
+# optr = input("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\nEnter your choice: ")
+# num1 = float(input("Enter first number: "))
+# num2 = float(input("Enter second number: "))
+#
+# if optr == '1':
+#     print(f"The addition of {num1} and {num2} is {num1 + num2}.")
+# elif optr == '2':
+#     print(f"The subtraction of {num1} and {num2} is {num1 - num2}.")
+# elif optr == '3':
+#     print(f"The multiplication of {num1} and {num2} is {num1 * num2}.")
+# if optr == '4':
+#     print(f"The division of {num1} and {num2} is {num1 / num2}.")
+# else:
+#     print("Enter a valid option.")
+
+# weight = float(input("Enter your weight: "))
+# unit = input("Enter your unit to convert in [k=kilograms, p=pounds] ")
+#
+# if unit == "k":
+#     kilograms = weight * 2.205
+#     print(f"Your weight is {kilograms} kilograms.")
+# elif unit == "p":
+#     pounds = weight / 2.205
+#     print(f"Your weight is {pounds} pounds.")
+
+# Temperature conversion program
+# unit = input("Enter conversion unit: [c=celsius, f=fahrenheit] ")
+# if unit == "f":
+#     temp_degree = float(input("Enter temperature in degree celsius: "))
+#     temp_fahrenheit = temp_degree * 9 / 5 + 32
+#     print(f"The temperature in Fahrenheit is {temp_fahrenheit}°")
+# elif unit == "c":
+#     temp_fahrenheit = float(input("Enter temperature in fahrenheit: "))
+#     temp_degree = (temp_fahrenheit - 32 ) * 5 / 9
+#     print(f"The temperature in degree Celsius is {temp_degree}°")
+# else:
+#     print("Enter a valid unit.")
+
+## Logical operators
+# Evaluate multiple conditions (and, or , not)
+# AND - Both conditions must be true
+# OR - Any one condition must be true
+# NOT - Negate
