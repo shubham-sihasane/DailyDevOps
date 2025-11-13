@@ -253,6 +253,8 @@ Remove files no longer needed, temp files, output files, complied code, os artif
 
 ```git show <tree-name>``` ✅ List the tree-name content
 
+`git annotate <filename>`  ⌘ Display details about file line by line
+
 ### ⛵ Basic Git Workflow (Local)
 Tree is a general computer science term for a hierarchical data structure . File System = Tree
 
@@ -383,6 +385,8 @@ By default, git ignores directories with no files
 ```git branch --merged``` ✅ List the branches which are fully merged with current branch
 
 ```git merge-base <branch1> <branch2>``` ✅ It helps to identify the most recent common commit where the branches diverged, useful for understanding changes in a branch.
+
+`git checkout <SHA_ID>` ✅ Checkout any commit `git switch -` to go back to HEAD
 
 #### 🌻 Switching with Uncommited Changes
 - ✅ Can switch when changes in working directory can be applied to branch version

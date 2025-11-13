@@ -1,4 +1,5 @@
 # A playground for learning python concepts
+import math
 
 # print("Hello, World!")
 # print("This is a playground for learning Python concepts.")
@@ -82,6 +83,49 @@
 # cart_total = price * quantity
 # print(f"\nShopping cart details:\nName of the item: {item}\nQuantity of the item: {quantity}\nTotal price: {cart_total}")
 
+# age = 30
+# age = age + 10 # age += 10
+# age = age - 10 # age -= 10
+# age = age * 2 # age *= 10
+# age = age ** 10 # age **= 10
+# age = age / 10 # age /= 10
+# age = age // 10 # age //= 10
+# age = age % 10 # age %= 10
+# print(f"The new age is {age}")
 
+# value = 3.15
+# age = -25
+# print(f"The round value of {value} is {round(value)}")
+# print(f"The absolute value of {age} is {abs(age)}")
+# print(f"The power of 5^2 is {pow(5, 2)}")
+# print(f"The maximum value in between {value} and {age} is {max(value, age)}")
+# print(f"The maximum value in between {value} and {age} is {min(value, age)}")
 
+# import math
+# print(f"The value of PI is {math.pi:.2f}")
+# print(f"The value of e is {math.e:.2f}")
+# print(f"The sqrt of pi is {math.sqrt(math.pi):.2f}")
+# print(f"The square of pi is {math.pow(math.pi, 2):.2f}")
+# print(f"The ceiling value of pi is {math.ceil(math.pi):.2f}")
+# print(f"The floor value of pi is {math.floor(math.pi):.2f}")
+
+# Calculate the circumference of the circle by accepting radius of circle
+# import math
+# radius = float(input("Enter the radius of the circle: "))
+# circumference = 2 * math.pi * radius
+# print(f"The circumference of the circle is {circumference:.2f}")
+
+# Calculate area of circle by accepting radius of circle
+# import math
+# radius = float(input("Enter the radius of the circle: "))
+# area = math.pi * radius ** 2
+# print(f"The area of the circle is {area:.2f}")
+
+# Calculate the hypotenuse of the right-angled triangle
+# import math
+# side1 = float(input("Enter the side 1: "))
+# side2 = float(input("Enter the side 2: "))
+# hypo = math.sqrt((pow(side1, 2)) + (pow(side2, 2)))
+# hypo = math.hypot(side1, side2) # math.sqrt((pow(side1, 2)) + (pow(side2, 2)))
+# print(f"The hypo value of triangle is {hypo:.2f}")
 

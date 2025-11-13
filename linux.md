@@ -49,7 +49,9 @@
 
 `ls` ✅ ⌘ The ls command in Linux is a fundamental utility used to list the contents of directories. When executed without any arguments, it displays the files and subdirectories within the current working directory. `ls <filename/directory>`
 
-`ls -l` ⌘ The -l option provides a detailed "long listing" format, showing information such as file permissions, number of links, owner, group, file size, and modification date.
+`ls -l` ⌘ The -l option provides a detailed "long listing" format, showing information such as file permissions, number of links, owner, group, file size, and modification date. `ls -l = ll`
+
+`tree` ⌘ Shows directory structure
 
 `ls -h` ⌘ Displays file sizes in a human-readable format
 
@@ -58,6 +60,8 @@
 `ls -a` ✅ Displays all files and directories, including hidden ones
 
 `ls -la` ✅ Displays files and folders including hidden items with additional details
+
+`ls -ltr` ⌘ -t for time based, -r for reverse order
 
 `cd` ⌘ The cd command in Linux stands for "change directory." It is a fundamental shell command used to navigate the file system hierarchy by changing the current working directory in the terminal. `cd <directory>`
 
@@ -88,6 +92,12 @@
 `mv <source-file/dir-path> <target-file/dir-path>` ✅ Rename a file or directory when source and target location is same
 
 `touch <filename>` ✅ Create an empty file
+
+`echo <filename> | less` OR `echo <filename> | more` ⌘ Displat information page by page
+
+`head -N <filename>` ⌘ Display first N lines from file
+
+`tail -N <filename>` ⌘ Display last N lines from file
 
 `cat > <filename>` ✅ Create a file and wait for user input and save with Ctr+D
 
