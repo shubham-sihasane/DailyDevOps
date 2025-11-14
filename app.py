@@ -198,3 +198,37 @@
 # AND - Both conditions must be true
 # OR - Any one condition must be true
 # NOT - Negate
+
+# marks = float(input("Enter your marks: "))
+# if marks >= 85:
+#     print("Awesome!\nYou received an A grade!")
+# elif 75 <= marks < 85: # marks >= 75 and marks < 85
+#     print("Wonderful!\nYou received a B grade!")
+# elif  60 <= marks < 75:
+#     print("Nice!\nYou received a C grade!")
+# else:
+#     print("Sorry.\nYou received a D grade!")
+
+# is_online = False
+# is_away = True
+# is_offline = False
+#
+# if is_online:
+#     print("User is available. 🍏 ")
+# elif is_away or is_offline:
+#     print("User is not available. 🍎")
+
+# is_gold = True
+# is_silver = False
+# print(f"The opposite of {is_gold} is {not is_gold}")
+# print(f"The opposite of {is_silver} is {not is_silver}")
+
+# Conditional Expression: A one line shortcut for if else statement (Ternary Operator)
+# X if condition else Y
+num = int(input("Enter a number: "))
+# if num % 2 == 0:
+#     print("Even")
+# else:
+#     print("Odd")
+result = "Number is Even 🌻" if num % 2 == 0 else "Number is Odd"
+print(result)
