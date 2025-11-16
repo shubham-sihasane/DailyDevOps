@@ -65,7 +65,6 @@
 # print(f"Division         {num1} / {num2} = {division}")
 # print(f"Floor Division   {num1} // {num2} = {floor_division}")
 # print(f"Power            {num1} ^ {num2} = {exponent}")
-
 # = | += | -= | *= | /= | //= | **=
 
 # num1 = int(input("Enter the first number: "))
