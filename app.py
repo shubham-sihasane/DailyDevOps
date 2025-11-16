@@ -1,5 +1,6 @@
 # A playground for learning python concepts
 # import math
+from itertools import count
 
 # print("Hello, World!")
 # print("This is a playground for learning Python concepts.")
@@ -225,10 +226,58 @@
 
 # Conditional Expression: A one line shortcut for if else statement (Ternary Operator)
 # X if condition else Y
-num = int(input("Enter a number: "))
+# num = int(input("Enter a number: "))
 # if num % 2 == 0:
 #     print("Even")
 # else:
 #     print("Odd")
-result = "Number is Even 🌻" if num % 2 == 0 else "Number is Odd"
-print(result)
+# result = "Number is Even 🌻" if num % 2 == 0 else "Number is Odd"
+# print(result)
+
+# num1 = int(input("Enter a number 1: "))
+# num2 = int(input("Enter a number 2: "))
+# max_num = num1 if num1 > num2 else num2
+# min_num = num1 if num1 < num2 else num2
+# print("The maximum number is ", max_num)
+# print("The minimum number is ", min_num)
+
+# String - A series of characters
+# name = input("Enter your name: ")
+# print(f"The length of {name} is {len(name)}")
+# print(f"The first occurrence of 'm' is {name.find('m')}")
+# print(f"The last occurrence of 'm' is {name.rfind('m')}")
+# print(f"The capitalize of {name} is {name.capitalize()}")
+# print(f"The uppercase of {name} is {name.upper()}")
+# print(f"The lowercase of {name} is {name.lower()}")
+# print(f"The title of {name} is {name.title()}")
+# print(f"Is Digit {name.isdigit()}")
+# print(f"Is Alphabet {name.isalpha()}")
+# print(f"Is Alphanumeric {name.isalnum()}")
+# print(f"The number of character 's' in {name.count('s')}")
+# print(f"Replace 's' with x {name.replace('s', 'x')}")
+# help(str)
+
+# username = input("Enter your username: ")
+#
+# if 5 < len(username) <= 15:
+#     if not username.find(" ") == -1:
+#         print("Username should not contain spaces.")
+#     elif not username.isalpha():
+#         print("Username should not contain letters.")
+#     else:
+#         print(f"Hey, {username}\nYour username and password are valid.")
+# else:
+#     print(f"Hey, {username}\nUsername must be between 5 and 15 characters.")
+
+# Indexing - Accessing elements of a sequence using [] - Indexing Operator [start:end:step]
+
+credit_number = "5245-3653-3257-8682"
+print(credit_number)
+print(credit_number[0])
+print(credit_number[-1])
+print(credit_number[:4]) # [0:4]
+print(credit_number[4:]) # [4:-1]
+print(credit_number[5:9])
+print(credit_number[::2])
+print(f"The last 4 digits of the credit number is {credit_number[-4:]}")
+print(f"The reverse of credit number is {credit_number[::-1]}")
