@@ -163,6 +163,10 @@ to read about a specific subcommand or concept guides.
 
 ```git add <filename1> <filename2> ...``` ✅ Add or more files into staging area
 
+```git add --all``` ✅ Add all files from working area to staging area
+
+```git add -a`` ✅ Add all files from working area to staging area
+
 ```git restore --satged <filename1> <filename2> ...``` ✅ Remove one or more files from staging area and put into working area
 
 ```git add .``` ✅ Add all files from working area to staging area
