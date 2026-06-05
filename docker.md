@@ -1,65 +1,239 @@
-Docker is an open-source platform that enables developers to build, ship, and run applications inside lightweight, portable containers. These containers package everything needed to run an application—code, libraries, and dependencies—so it works consistently across environments.
+`docker -v` OR `docker --version` # Print docker version and quit (client)
 
-### 🐳 Key Concepts of Docker
+`docker version` # Print docker version (client & server)
 
-**Containers vs. Virtual Machines**
-- Containers run in container runtimes vs VM's run on top of hypervisors
-- Containers work alongside operating systems vs VM's need hardware emulation
-- Containers do tno required OS configuration vs VM's require OS configuration
-- Containers usually run one app at a time vs VM's can run many apps at once
+`cat /etc/*release/*` # About linux system information
 
-**Containerization vs. Virtualization**
-- Traditional virtualization uses virtual machines (VMs) with separate guest operating systems, which are resource-heavy. 
-- Docker containers share the host OS kernel, making them faster, more efficient, and easier to scale.
+`sudo systemctl status docker` # Check status of docker service
 
-**Docker Engine**
-- The core runtime that builds and runs containers. 
-- Written in Go and runs natively on Linux, with support for Windows and macOS.
+`docker` # List all the important docker commands
 
-**Portability & Consistency**
-- Docker solves the “works on my machine” problem by standardizing the runtime environment. 
-- Containers can run anywhere—on a developer’s laptop, on-prem servers, or in the cloud.
+#### Management Commands:
+- builder -> Manage builds
+- buildx* -> Docker Buildx
+- compose* -> Manage Compose
+- container -> Manage containers
+- context -> Manage context
+- image -> Manage images
+- manifest -> manage docker manifests & manifests lists
+- network -> Manage plugins
+- plugin -> Manage plugins
+- system -> Manage Docker
+- volume -> Manage volumes
 
-**Isolation & Security**
-- Each container runs in a loosely isolated environment, ensuring that applications don’t interfere with each other.
+#### Swarm Commands
+- swarm -> Manage Swarm
 
-**Speed & Efficiency**
-- Containers start almost instantly and use fewer resources than VMs. 
-- Ideal for microservices architecture and CI/CD pipelines.
+`docker <command> help` # Help page for command
 
-#### **Real-World Use Cases**
-- Running multiple microservices in isolated containers. 
-- Packaging legacy apps for cloud migration. 
-- Creating reproducible environments for testing and QA. 
-- Building modular, scalable systems with Kubernetes.
+`docker system info` # Display system wide information about docker
 
-#### Anatomy of containers
-In Docker, namespaces and control groups (cgroups) are core Linux kernel features that provide isolation and resource management for containers. They ensure that each container operates independently and efficiently on a shared host system.
+`docker system df` # Show docker disk usage
 
-#### **Namespaces: Isolation Mechanism**
-Namespaces give each container its own view of the system, isolating it from others. Docker uses several types:
-- PID namespace: Isolates process IDs so containers don’t see or interfere with each other’s processes. 
-- NET namespace: Provides separate network interfaces, IP addresses, and routing tables. 
-- MNT namespace: Isolates filesystem mounts, so each container has its own root filesystem. 
-- UTS namespace: Separates hostname and domain name settings. 
-- IPC namespace: Isolates inter-process communication resources like shared memory. 
-- User namespace: Maps container user IDs to host user IDs, enhancing security.
+`docker system events` # Display real time events from docker server
 
-This isolation ensures containers behave like mini virtual machines without the overhead of full virtualization.
+`docker system prune` # Remove unused docker data, remove all stopped containers, unused docker networks by containers, all dangling images, unused build cache
 
-#### **Control Groups (cgroups): Resource Management**
-Cgroups limit and monitor resource usage for containers.
+#### Manage Containers
+`docker container ls` # List containers
 
-- Restrict CPU usage: Prevent one container from hogging all CPU cycles. 
-- Limit memory: Set memory caps to avoid out-of-memory errors. 
-- Throttle I/O: Control disk and network bandwidth. 
-- Track resource usage: Monitor performance and enforce quotas.
+`docker container ps -q` # List running containers, `-q` for ID's only
 
-Cgroups are hierarchical, meaning you can group containers and apply policies collectively or individually.
+`docker container ps -aq` # List running and stopped, all containers, `-q` for ID's only
 
-#### **Why It Matters for DevOps**
+`docker container create <image-name>` # Create a container
 
-- Namespaces ensure security and isolation, critical for multi-tenant environments. 
-- Cgroups enable fine-grained control over performance, essential for optimizing workloads and preventing resource contention. 
-- Together, they form the backbone of container orchestration tools like Kubernetes.
+`docker container run <image-name>:<tag-name>` # Create and start a container from specific image, default tag is latest
 
+`docker container exec <container-name/ID> <command>` # Execute a command in a running container
+
+`dcker container start <container-name/ID>` # Start a created or stopped container
+
+`docker container stop <container-name/ID>` # Stop a running container
+
+`docker container stop $(docker container ps)` # Stop all running containers
+
+`docker container rm <container-name/ID> -f` # Remove, delete a stopped running container, `-f` for forcefull deleting without stopping a container
+
+`docker container rm $(docker container ps -a)` # Remove all stopped containers
+
+`docker container restart <container-name/ID>` # Restart a running container
+
+`docker container kill <container-name/ID>` # Kill a container
+
+`docker container pause <container-name/ID>` # Pause a running container
+
+`docker container unpause <container-name/ID>` # Unpause a paused container
+
+`docker container rename <old-container-name> <new-container-name>` # Rename an existing container with new name
+
+`docker container logs <container-name/ID>` # Print logs created by a container
+
+`docker container top <container-name/ID>` # Print running processes of a container
+
+`docker container inspect <container-name/ID>` # Display detailed information of one or more containers
+
+`docker container port <container-name/ID>` # List port mappings or a specific mapping for the container, `172.17.0.1` docker gateway and further docker containers get IP
+
+`docker container prune` # Remove all stopped containers
+
+`docekr container stats` # Display live stream of container/s resource usage statistics
+
+`docker container attach <container-name-ID>` # Attach to interactive terminal of the running container -> stdin, stdout, stderr streams
+
+`docker container commit <container-name/ID> <new-image-name>` # Create a new image from a container's changes like AWS AMI
+
+`docker container export <container-name/ID> <image.tar>` # Export a conatiner's filesystem as a tar archive
+
+`docker container cp <source-path> <container:destination-path>` # Copy files or folders between a local filesystem and container
+
+`docker container diff <container-name/ID>` # Inspect changes to files or directories on a container's filesystem
+
+`docker container update [options] <container-name/ID>` # Update configuration of one or more container
+
+`docker container wait <container-name/ID>` # Block untill one or more containers stop, then print their exit codes
+
+# `docker container run -d -p <host-port>:<container-port> <image-name>`
+
+- -d for running container in background or detached mode
+- -p for mapping host port to container port
+- -v for mapping local host system filepath inside container filesystem path
+
+
+#### Manage Images
+
+`docker login` # Authenticate to a registry
+
+`docker logout` # Log out from a registry
+
+`docker search <image-name>:<tag-name>` # Search image in docker hub -> default registry
+
+`docker image ls` # List images
+
+`docker image pull` # Download an image from a registry
+
+
+
+`docker image build -t <image-name>:<tag-name> -f <Dockerfile-path> <build-context>` OR `docker image build .` # Build an image from Dockerfile with reference to build 
+
+`docker image build --build-arg <API=secret-key -t <image-name>:<tag-name>  .` # This will leak the secret info in image history, Not recommended for sensitive information
+
+`docker tag <old-image-name>:<tag-name> <new-image-name>:<tag-name>` # Tag or rename an existing image
+
+`docker image push <registry:/image-name>:<tag-name>` # Upload an image to registry
+
+`docker image inspect <image-name>:<tag-name>` # Display detailed information on one or more images
+
+`docker image history --no-trunc <image-name>:<tag-name>` # Show the history of an image, `--no-trunc` for detailed history not just layers
+
+`docker image import <image.tar>` # Import the contents from a tarball to create a filesystem image
+
+`docker image save <image-name>:<tag-name> <image.tar>` # Save one or more images to a tar archive
+
+`docker image load <image.tar>` # Load an image from a tar archive
+
+`docker image rm <image-name>:<tag-name>` OR `docker rmi <image-name>:<tag-name>`# Remove one or more images
+
+`docker image prune` # Remove unused images
+
+#### Manage Networks
+`docker network ls` # List networks
+
+# `docker network create [options] <custom-network>` # Create a custom network
+
+`docker network inspect <network-name>` # Display detailed information on one or more networks
+
+`docker network connect [options] <network-name> <container-name>` # Connect a container to network
+
+`docker network disconnect [options] <network-name> <container-name>` # Disconnect a container from network
+
+`docker network rm <network-name>` # Remove one or more networks
+
+`docker network prune` # Remove one or more networks
+
+
+#### Manage Volumes
+`docker volume ls` # List volumes
+
+`docker create <volume-name>` # Create a custom volume
+
+`docker inspect <volume-name>` # Display detailed information on one or more volumes
+
+`docker rm <volume-name>` # Remove or more volumes
+
+`docker volume prune` # Remove unused local volumes
+
+`docker container run -v /opt/datadir:/var/lib/mysql <mysql-image>`# Create a container by mouting volume
+
+`docker container run --mount type=bind,source=/opt/datadir,target=/var/lib/mysql mysql` # Create container by mouting volume
+
+`docker run -p 8080:8080 -p 50000:50000 --restart=on-failure -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk21`# Create a jenkins containe
+
+
+#### PROBLEMS with Traditional Docker Builds - Legacy image builder issues
+- *Package Re-download* -> every build, every layer from sratch, time consuming and unnecessary
+- *Secrets Leak* -> No matter the work around
+- *Architecture Lock-In* -> amd64/arm64, image built on intel amd64 wont work arm64 like apple silicon
+- *Sequential Stages* -> Independent stages running sequentially though can be run parallel, time consuming
+
+#### Secrets Leak Issues - Passing secret info while building image
+- *Build Argument*
+  - Passing secret using`--build-arg` is safe as it's runtime of building image but still secrets information remains in layers of image, easy expose
+- *Env*
+  - Passing secret as a part of image itself using `ENV` argument is worst way to expose as it will remain in image layers
+- *Copy and Delete*
+  - Copy secret into image and delete again from image using separate layers, easy expose from image layers and tarball extration
+- *Multi-Stage Build*
+  - Passing secret in one stage and using it in another stage, little safer but still secret remains available for exposure in earlier stages and filesystem of host system 
+
+#### Solution -> Docker BuildKit -> buildx
+Docker launched Docker BuildKit to solve all above issues and it's default with docker version 23.0
+- Content-hashed caching
+- Four new capabilities
+
+
+#### Manage Buildx
+Extended build capabilities with BuildKit
+Usage:  docker buildx [OPTIONS] COMMAND
+
+Extended build capabilities with BuildKit
+
+Options:
+      --builder string   Override the configured builder instance
+  -D, --debug            Enable debug logging
+
+Management Commands:
+  dap         Start debug adapter protocol compatible debugger
+  history     Commands to work on build records
+  imagetools  Commands to work on images in registry
+  policy      Commands for working with build policies
+
+Commands:
+  bake        Build from a file
+  build       Start a build
+  create      Create a new builder instance
+  dial-stdio  Proxy current stdio streams to builder instance
+  du          Disk usage
+  inspect     Inspect current builder instance
+  ls          List builder instances
+  prune       Remove build cache
+  rm          Remove one or more builder instances
+  stop        Stop builder instance
+  use         Set the current builder instance
+  version     Show buildx version information
+
+Run 'docker buildx COMMAND --help' for more information on a command.
+
+#### Dockerfile Examples
+
+FROM ubuntu
+RUN apt-get update -y
+RUN apt-get install python3-flask -y
+COPY app.py /opt/app.py
+ENV FLASK_APP=/opt/app.py
+EXPOSE 5000
+ENTRYPOINT ["flask", "run", "--host=0.0.0.0"]
+
+FROM alpine
+RUN apt-get update -y && \
+    apt-get install python-flask
