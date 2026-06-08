@@ -43,7 +43,7 @@
 
 `docker container create <image-name>` # Create a container
 
-`docker container run <image-name>:<tag-name>` # Create and start a container from specific image, default tag is latest
+`docker container run <image-name>:<tag-name>` # Create and start a container from specific image, default tag is latest, `--rm` to remove container once it is stopped
 
 `docker container exec <container-name/ID> <command>` # Execute a command in a running container
 
@@ -53,7 +53,7 @@
 
 `docker container stop $(docker container ps)` # Stop all running containers
 
-`docker container rm <container-name/ID> -f` # Remove, delete a stopped running container, `-f` for forcefull deleting without stopping a container
+`docker container rm <container-name/ID> -f` # Remove, delete a stopped running container, `-f`or `--force` for forcefull deleting without stopping a container
 
 `docker container rm $(docker container ps -a)` # Remove all stopped containers
 
@@ -95,14 +95,14 @@
 
 # `docker container run -d -p <host-port>:<container-port> <image-name>`
 
-- -d for running container in background or detached mode
+- -d or --detach for running container in background or detached mode
 - -p for mapping host port to container port
 - -v for mapping local host system filepath inside container filesystem path
 
 
 #### Manage Images
 
-`docker login` # Authenticate to a registry
+`docker login <registry-name>` # Authenticate to a registry
 
 `docker logout` # Log out from a registry
 
@@ -112,7 +112,7 @@
 
 `docker image pull` # Download an image from a registry
 
-
+`docker.io/library/nginx` # registry/namespace/repo -> docker.io/sihasaneshubham/solar-system:tagname
 
 `docker image build -t <image-name>:<tag-name> -f <Dockerfile-path> <build-context>` OR `docker image build .` # Build an image from Dockerfile with reference to build 
 
@@ -151,6 +151,20 @@
 
 `docker network prune` # Remove one or more networks
 
+- docker0
+- Docker DNS = `27.0.0.11` Containers can communicate with each other via container name or IP
+
+`docker -H=10.123.2.1:2376 --tlsverify run nginx` # Run container on remote host
+
+`docker network create --driver bridge --subnet 182.18.0.0/16 <custom-network>` # Create a custom network
+
+/var/lib/docker/
+	containers/
+	images/
+	volumes/
+	overlays2/
+
+
 
 #### Manage Volumes
 `docker volume ls` # List volumes
@@ -167,8 +181,13 @@
 
 `docker container run --mount type=bind,source=/opt/datadir,target=/var/lib/mysql mysql` # Create container by mouting volume
 
-`docker run -p 8080:8080 -p 50000:50000 --restart=on-failure -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk21`# Create a jenkins containe
+`docker run -p 8080:8080 -p 50000:50000 --restart=on-failure --memory=100m --cpus=0.5 -v --build-arg <key>:<value> --env <key>:<value> jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk21`# Create a jenkins container, -e, --env, --env-file
 
+#### Restart Policies
+- no - Do not start container by default
+- always - Restart container
+- on-failure - Restart when container exits with a non-zero exit code
+- unless-stopped - Always restart except when you manually stop container
 
 #### PROBLEMS with Traditional Docker Builds - Legacy image builder issues
 - *Package Re-download* -> every build, every layer from sratch, time consuming and unnecessary
@@ -223,6 +242,27 @@ Commands:
   version     Show buildx version information
 
 Run 'docker buildx COMMAND --help' for more information on a command.
+
+### Dockerfile
+
+`ADD`	-> Add local or remote files and directories.
+`ARG`	-> Use build-time variables.
+`CMD`	-> Specify default commands.
+`COPY`	-> Copy files and directories.
+`ENTRYPOINT`	-> Specify default executable.
+`ENV`	-> Set environment variables.
+`EXPOSE`	-> Describe which ports your application is listening on.
+`FROM`	-> Create a new build stage from a base image.
+`HEALTHCHECK`	-> Check a container's health on startup.
+`LABEL`	-> Add metadata to an image.
+`MAINTAINER`	-> Specify the author of an image.
+`ONBUILD`	-> Specify instructions for when the image is used in a build.
+`RUN`	-> Execute build commands.
+`SHELL`	-> Set the default shell of an image.
+`STOPSIGNAL`	-> Specify the system call signal for exiting a container.
+`USER`	-> Set user and group ID.
+`VOLUME`	-> Create volume mounts.
+`WORKDIR`	-> Change working directory.
 
 #### Dockerfile Examples
 
