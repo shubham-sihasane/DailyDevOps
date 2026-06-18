@@ -43,7 +43,9 @@
 
 `docker container create <image-name>` # Create a container
 
-`docker container run <image-name>:<tag-name>` # Create and start a container from specific image, default tag is latest, `--rm` to remove container once it is stopped
+`docker container run <image-name>:<tag-name>` # Create and start a container from specific image, default tag is latest, `--rm` to remove container once it is stopped, `--rm` for removing a container after stopped automatically
+
+`docker container run --name <container-name> --hostname <container-hostname> <image-name>:<tag-name>` # Create a container with name and set a custom hostname
 
 `docker container exec <container-name/ID> <command>` # Execute a command in a running container
 
@@ -67,7 +69,7 @@
 
 `docker container rename <old-container-name> <new-container-name>` # Rename an existing container with new name
 
-`docker container logs <container-name/ID>` # Print logs created by a container
+`docker container logs <container-name/ID>` # Print logs created by a container, `-f` for verbose live logging, `--log-driver json-file`
 
 `docker container top <container-name/ID>` # Print running processes of a container
 
@@ -77,7 +79,9 @@
 
 `docker container prune` # Remove all stopped containers
 
-`docekr container stats` # Display live stream of container/s resource usage statistics
+`docekr container stats` # Display live stream of containers resource usage statistics
+
+`docker container stat <container-name-ID>` # List statistics of specific container
 
 `docker container attach <container-name-ID>` # Attach to interactive terminal of the running container -> stdin, stdout, stderr streams
 
@@ -85,7 +89,7 @@
 
 `docker container export <container-name/ID> <image.tar>` # Export a conatiner's filesystem as a tar archive
 
-`docker container cp <source-path> <container:destination-path>` # Copy files or folders between a local filesystem and container
+`docker container cp <local-source-path> <container:destination-path>` # Copy files or folders between a local filesystem and container
 
 `docker container diff <container-name/ID>` # Inspect changes to files or directories on a container's filesystem
 
@@ -93,7 +97,7 @@
 
 `docker container wait <container-name/ID>` # Block untill one or more containers stop, then print their exit codes
 
-# `docker container run -d -p <host-port>:<container-port> <image-name>`
+`docker container run -d -p <host-port>:<container-port> <image-name>` # Expose a container port to host port, if host port not mentioned - random available port, -P without any ports info - expose instruction for container port, random port of host
 
 - -d or --detach for running container in background or detached mode
 - -p for mapping host port to container port
@@ -106,7 +110,7 @@
 
 `docker logout` # Log out from a registry
 
-`docker search <image-name>:<tag-name>` # Search image in docker hub -> default registry
+`docker search <image-name>:<tag-name>` # Search image in docker hub -> default registry, `--filter stars=10`, many other filters
 
 `docker image ls` # List images
 
@@ -181,7 +185,7 @@
 
 `docker container run --mount type=bind,source=/opt/datadir,target=/var/lib/mysql mysql` # Create container by mouting volume
 
-`docker run -p 8080:8080 -p 50000:50000 --restart=on-failure --memory=100m --cpus=0.5 -v --build-arg <key>:<value> --env <key>:<value> jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk21`# Create a jenkins container, -e, --env, --env-file
+`docker run --name jenkins -p 8080:8080 -p 50000:50000 --restart=on-failure --memory=100m --cpus=0.5 -v --build-arg <key>:<value> --env <key>:<value> jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk21`# Create a jenkins container, -e, --env, --env-file
 
 #### Restart Policies
 - no - Do not start container by default
@@ -277,3 +281,71 @@ ENTRYPOINT ["flask", "run", "--host=0.0.0.0"]
 FROM alpine
 RUN apt-get update -y && \
     apt-get install python-flask
+
+
+## Docker Compose
+
+- Usage:  docker compose [OPTIONS] COMMAND
+- Define and run multi-container applications with Docker
+
+Management Commands: `bridge` # Convert compose files into another model
+
+attach                  Attach local standard input, output, and error streams to a service's running container
+build                   Build or rebuild services
+commit                  Create a new image from a service container's changes
+config                  Parse, resolve and render compose file in canonical format
+cp                      Copy files/folders between a service container and the local filesystem
+create                  Creates containers for a service
+down                    Stop and remove containers, networks
+events                  Receive real time events from containers
+exec                    Execute a command in a running container
+export                  Export a service container's filesystem as a tar archive
+images                  List images used by the created containers
+kill                    Force stop service containers
+logs                    View output from containers
+ls                      List running compose projects
+pause                   Pause services
+port                    Print the public port for a port binding
+ps                      List containers
+publish                 Publish compose application
+pull                    Pull service images
+push                    Push service images
+restart                 Restart service containers
+rm                      Removes stopped service containers
+run                     Run a one-off command on a service
+scale                   Scale services 
+start                   Start services
+stats                   Display a live stream of container(s) resource usage statistics
+stop                    Stop services
+top                     Display the running processes
+unpause                 Unpause services
+up                      Create and start containers
+version                 Show the Docker Compose version information
+volumes                 List volumes
+wait                    Block until containers of all (or specified) services stop.
+watch                   Watch build context for service and rebuild/refresh containers when files are updated
+
+version: "3.0"
+services:
+  redis:
+    image: redis
+    networks:
+      - backend
+  db:
+    image: postgres:9.4
+    networks:
+      - frontend
+      - backend
+  vote:
+    image: voting-app
+    networks:
+      - frontend
+      - backend
+  result:
+    image: result
+    networks:
+      - frontend
+      - backen
+networks:
+  frontend:
+  backend
