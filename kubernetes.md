@@ -2,7 +2,7 @@
 
 `minikube version` # Single node kubernetes cluster, check minikube version
 
-
+`kubectl cluster-info dump` # Print cluster information, `dump` for verbose details
 
 
 ### Kubectl Create Object
@@ -81,6 +81,31 @@
 
 `kubectl delete -f <service.yaml>` # Delete a service
 
+`kubectl create -f <configMap.yaml>` # Create a configMap
+
+`kubectl create configmap <configmap-name> --from-literal=<KEY>:<VALUE>` # Create a configmap imperatively
+
+`kubectl create configmap <configmap-name> --from-file=<config-filename>` # Create a configmap from a file
+
+`kubectl get configmaps` # List configmaps
+
+`kubectl delete -f <configMap.yaml>` # Delete a configMap
+
+`kubectl delete configmap <configmap-name>` # Delete a configMap
+
+`kubectl create -f <secret.yaml>` # Create a secret 
+
+`kubectl create secret generic <secret-name> --from-literal=<key>:<value>` # Create a secret from values
+
+`kubectl create secret generic <secret-name> --from-file=<key>:<value>` # Create a secret from file
+
+`kubectl get secrets` # List all secrets
+
+`kubectl describe secret <secret-name>` # Inspect secret details in encoded, `-o yaml` for full original value
+
+`kubectl delete secret <secrt-name>` # Delete a secret
+
+`kubectl delete -f <secret.yaml>` # Delete a secret
 
 
 `clusterrole` -> Create a cluster role
@@ -116,6 +141,24 @@ spec:
         - containerPort: 80
     - name: redis-container
       image: redis
+    envFrom:
+      - configMapRef:
+          name: <configmap-name>
+    envFrom:
+      - secretRef:
+          name: <secret-name>
+    env:
+      - name: <configmap-name>
+        valueFrom:
+          configMapRefKey:
+            name: <key-name>
+            key: <key-value>
+    env:
+      - name: <secret-name>
+        valueFrom:
+          secretKeyRef:
+            name: <KEY>
+            key: <VALUE>
 
 ---
 apiVersion: v1
@@ -201,5 +244,22 @@ spec:
       nodePort: 30008
 ---
 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  <KEY>: <VALUE>
 
+---
 
+apiVersion: v1
+kind: Secrets
+metadata:
+  name: nginx-secret
+data:
+  <key>:<HASH-value>
+
+*echo -n 'secret' | base64* # Convert secret into base64 value and add as HASH value
+
+*echo -n 'encoded-secret' | base64 --decode* To decode encoded value

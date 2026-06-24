@@ -270,6 +270,7 @@ Run 'docker buildx COMMAND --help' for more information on a command.
 
 #### Dockerfile Examples
 
+```
 FROM ubuntu
 RUN apt-get update -y
 RUN apt-get install python3-flask -y
@@ -281,6 +282,99 @@ ENTRYPOINT ["flask", "run", "--host=0.0.0.0"]
 FROM alpine
 RUN apt-get update -y && \
     apt-get install python-flask
+```
+```
+# base defines a base stage that uses the official python runtime base image
+FROM python:3.11-slim AS base
+
+# Add curl for healthcheck
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set the application directory
+WORKDIR /usr/local/app
+
+# Install our requirements.txt
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# dev defines a stage for development, where it'll watch for filesystem changes
+FROM base AS dev
+RUN pip install watchdog
+ENV FLASK_ENV=development
+CMD ["python", "app.py"]
+
+# final defines the stage that will bundle the application for production
+FROM base AS final
+
+# Copy our code from the current folder to the working directory inside the container
+COPY . .
+
+# Make port 80 available for links and/or publish
+EXPOSE 80
+
+# Define our command to be run when launching the container
+CMD ["gunicorn", "app:app", "-b", "0.0.0.0:80", "--log-file", "-", "--access-logfile", "-", "--workers", "4", "--keep-alive", "0"]
+```
+
+```
+FROM node:18-slim
+
+# add curl for healthcheck
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl tini && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/local/app
+
+# have nodemon available for local dev use (file watching)
+RUN npm install -g nodemon
+
+COPY package*.json ./
+
+RUN npm ci && \
+ npm cache clean --force && \
+ mv /usr/local/app/node_modules /node_modules
+
+COPY . .
+
+ENV PORT=80
+EXPOSE 80
+
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["node", "server.js"]
+```
+```
+# because of dotnet, we always build on amd64, and target platforms in cli
+# dotnet doesn't support QEMU for building or running. 
+# (errors common in arm/v7 32bit) https://github.com/dotnet/dotnet-docker/issues/1537
+# https://hub.docker.com/_/microsoft-dotnet
+# hadolint ignore=DL3029
+# to build for a different platform than your host, use --platform=<platform>
+# for example, if you were on Intel (amd64) and wanted to build for ARM, you would use:
+# docker buildx build --platform "linux/arm64/v8" .
+
+# build compiles the program for the builder's local platform
+FROM --platform=${BUILDPLATFORM} mcr.microsoft.com/dotnet/sdk:7.0 AS build
+ARG TARGETPLATFORM
+ARG TARGETARCH
+ARG BUILDPLATFORM
+RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM"
+
+WORKDIR /source
+COPY *.csproj .
+RUN dotnet restore -a $TARGETARCH
+
+COPY . .
+RUN dotnet publish -c release -o /app -a $TARGETARCH --self-contained false --no-restore
+
+# app image
+FROM mcr.microsoft.com/dotnet/runtime:7.0
+WORKDIR /app
+COPY --from=build /app .
+ENTRYPOINT ["dotnet", "Worker.dll"]
+```
 
 
 ## Docker Compose
@@ -325,27 +419,98 @@ volumes                 List volumes
 wait                    Block until containers of all (or specified) services stop.
 watch                   Watch build context for service and rebuild/refresh containers when files are updated
 
-version: "3.0"
+
+```
 services:
-  redis:
-    image: redis
-    networks:
-      - backend
-  db:
-    image: postgres:9.4
-    networks:
-      - frontend
-      - backend
   vote:
-    image: voting-app
+    build: 
+      context: ./vote
+      target: dev
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck: 
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    volumes:
+     - ./vote:/usr/local/app
+    ports:
+      - "8080:80"
     networks:
-      - frontend
-      - backend
+      - front-tier
+      - back-tier
+
   result:
-    image: result
+    build: ./result
+    # use nodemon rather than node for local dev
+    entrypoint: nodemon --inspect=0.0.0.0 server.js
+    depends_on:
+      db:
+        condition: service_healthy 
+    volumes:
+      - ./result:/usr/local/app
+    ports:
+      - "8081:80"
+      - "127.0.0.1:9229:9229"
     networks:
-      - frontend
-      - backen
+      - front-tier
+      - back-tier
+
+  worker:
+    build:
+      context: ./worker
+    depends_on:
+      redis:
+        condition: service_healthy 
+      db:
+        condition: service_healthy 
+    networks:
+      - back-tier
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - "./healthchecks:/healthchecks"
+    healthcheck:
+      test: /healthchecks/redis.sh
+      interval: "5s"
+    networks:
+      - back-tier
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+      - "./healthchecks:/healthchecks"
+    healthcheck:
+      test: /healthchecks/postgres.sh
+      interval: "5s"
+    networks:
+      - back-tier
+
+  # this service runs once to seed the database with votes
+  # it won't run unless you specify the "seed" profile
+  # docker compose --profile seed up -d
+  seed:
+    build: ./seed-data
+    profiles: ["seed"]
+    depends_on:
+      vote:
+        condition: service_healthy 
+    networks:
+      - front-tier
+    restart: "no"
+
+volumes:
+  db-data:
+
 networks:
-  frontend:
-  backend
+  front-tier:
+  back-tier:
+```
