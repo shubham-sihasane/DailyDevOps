@@ -85,7 +85,7 @@
 
 `kubectl create configmap <configmap-name> --from-literal=<KEY>:<VALUE>` # Create a configmap imperatively
 
-`kubectl create configmap <configmap-name> --from-file=<config-filename>` # Create a configmap from a file
+`kubectl create configmap <configmap-name> --from-file=<config-filename/directory>` # Create a configmap from a file
 
 `kubectl get configmaps` # List configmaps
 
@@ -153,6 +153,13 @@ spec:
           configMapRefKey:
             name: <key-name>
             key: <key-value>
+    volumeMounts:
+      - mounthPath: /my-data
+        name: data-volume
+  volumes:
+    - name: data-volume
+      configMap:
+        name: <configmap-name>
     env:
       - name: <secret-name>
         valueFrom:
